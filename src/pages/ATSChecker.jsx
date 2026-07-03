@@ -1,4 +1,26 @@
+import { useState } from "react";
 function ATSChecker() {
+    const [jobDescription, setJobDescription] = useState("");
+    const [resume, setResume] = useState(null);
+    const [showResults, setShowResults] = useState(false);
+
+const [error, setError] = useState("");
+const handleAnalyze = () => {
+
+  if (!resume) {
+    setError("Please upload a resume.");
+    return;
+  }
+
+  if (!jobDescription.trim()) {
+    setError("Please enter a job description.");
+    return;
+  }
+
+  setError("");
+
+  setShowResults(true);
+};
   return (
     <section className="min-h-screen bg-linear-to-br from-slate-100 via-blue-50 to-violet-50 py-16 px-18">
 
@@ -39,35 +61,79 @@ function ATSChecker() {
           </div>
 
           <input
-            type="file"
-            className="
-              mt-8
-              w-full
-              p-8
-              border-2
-              border-dashed
-              border-blue-400
-              rounded-3xl
-              bg-blue-50
-            "
-          />
+  type="file"
+  accept=".pdf"
+  onChange={(e) => setResume(e.target.files[0])}
+  className="
+    mt-8
+    w-full
+    p-8
+    border-2
+    border-dashed
+    border-blue-400
+    rounded-3xl
+    bg-blue-50
+    cursor-pointer
+  "
+/>
+
+
+{resume && (
+  <p className="mt-3 text-green-600 font-medium">
+    Selected File: {resume.name}
+  </p>
+)}
+
+{/* Job Description */}
+
+<div className="mt-8">
+
+  <h3 className="text-2xl font-bold mb-4">
+    Job Description
+  </h3>
+
+  <textarea
+  value={jobDescription}
+  onChange={(e) =>
+    setJobDescription(e.target.value)
+  }
+  placeholder="Paste the complete job description here..."
+  rows="12"
+  className="
+    w-full
+    p-5
+    border-2
+    border-slate-200
+    rounded-2xl
+    bg-slate-50
+  "
+/>
+
+</div>
+
+{error && (
+  <p className="text-red-600 mt-4 font-medium">
+    {error}
+  </p>
+)}
 
           <button
-            className="
-              mt-6
-              w-full
-              py-4
-              rounded-2xl
-              bg-linear-to-r
-              from-blue-600
-              to-violet-600
-              text-white
-              font-bold
-              text-lg
-            "
-          >
-            Analyze Resume
-          </button>
+  onClick={handleAnalyze}
+  className="
+    mt-6
+    w-full
+    py-4
+    rounded-2xl
+    bg-linear-to-r
+    from-blue-600
+    to-violet-600
+    text-white
+    font-bold
+    text-lg
+  "
+>
+  Analyze Resume
+</button>
 
         </div>
 

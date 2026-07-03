@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   FaChartLine,
@@ -8,43 +9,48 @@ import {
 
 function FeatureSection() {
   const features = [
-    {
-      icon: <FaChartLine />,
-      title: "ATS Analysis",
-      description:
-        "Analyze ATS compatibility, formatting issues, and keyword optimization.",
-      points: [
-        "ATS Score",
-        "Keyword Check",
-        "Resume Formatting",
-      ],
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: <FaBrain />,
-      title: "Skill Detection",
-      description:
-        "Extract technical and soft skills and identify missing competencies.",
-      points: [
-        "Technical Skills",
-        "Missing Skills",
-        "Skill Categories",
-      ],
-      color: "from-violet-500 to-purple-500",
-    },
-    {
-      icon: <FaBullseye />,
-      title: "JD Matching",
-      description:
-        "Compare resumes against job descriptions and improve relevance.",
-      points: [
-        "Match Percentage",
-        "Missing Keywords",
-        "Improvement Areas",
-      ],
-      color: "from-emerald-500 to-green-500",
-    },
-  ];
+  {
+    icon: <FaChartLine />,
+    title: "ATS Analysis",
+    description:
+      "Analyze ATS compatibility, formatting issues, and keyword optimization.",
+    points: [
+      "ATS Score",
+      "Keyword Check",
+      "Resume Formatting",
+    ],
+    color: "from-blue-500 to-cyan-500",
+    link: "/ats-analysis",
+  },
+
+  {
+    icon: <FaBrain />,
+    title: "Skill Detection",
+    description:
+      "Extract technical and soft skills and identify missing competencies.",
+    points: [
+      "Technical Skills",
+      "Missing Skills",
+      "Skill Categories",
+    ],
+    color: "from-violet-500 to-purple-500",
+    link: "/skill-detection",
+  },
+
+  {
+    icon: <FaBullseye />,
+    title: "JD Matching",
+    description:
+      "Compare resumes against job descriptions and improve relevance.",
+    points: [
+      "Match Percentage",
+      "Missing Keywords",
+      "Improvement Areas",
+    ],
+    color: "from-emerald-500 to-green-500",
+    link: "/jd-matching",
+  },
+];
 
   return (
     <section className="py-24 px-6">
@@ -145,21 +151,25 @@ function FeatureSection() {
               </ul>
 
               {/* Button */}
-              <button
-                className="
-                  mt-8
-                  flex
-                  items-center
-                  gap-2
-                  text-blue-600
-                  font-semibold
-                  hover:gap-4
-                  transition-all
-                "
-              >
-                Learn More
-                <FaArrowRight />
-              </button>
+              <Link
+  to={feature.link}
+  className="
+    mt-8
+    flex
+    items-center
+    gap-2
+    text-blue-600
+    font-semibold
+    hover:gap-4
+    transition-all
+  "
+>
+  Learn More
+  <FaArrowRight />
+</Link>
+
+
+
 
             </motion.div>
 

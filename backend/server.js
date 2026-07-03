@@ -1,27 +1,22 @@
 const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Home Route
 app.get("/", (req, res) => {
-  res.send("Backend Working");
+  res.send("🚀 ResumeIQ Backend is Running!");
 });
 
-app.get("/ats", (req, res) => {
-  res.json({
-    score: 87,
-    skills: [
-      "React",
-      "JavaScript",
-      "Node.js"
-    ],
-    suggestions: [
-      "Add more projects",
-      "Include achievements",
-      "Improve summary section"
-    ]
-  });
-});
+// Port
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000, () => {
-  console.log("Server Started");
+// Start Server
+app.listen(PORT, () => {
+  console.log(`✅ Server is running on http://localhost:${PORT}`);
 });

@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -7,6 +7,9 @@ import Home from "./pages/Home";
 import AboutSection from "./pages/AboutUs";
 import ScrollToTop from "./components/ScrollToTop";
 import ATSChecker from "./pages/ATSChecker";
+import ATSAnalysis from "./pages/ATSAnalysis";
+import SkillDetection from "./pages/SkillDetection";
+import JDMatching from "./pages/JDMatching";
 function App() {
   return (
     <BrowserRouter>
@@ -19,9 +22,25 @@ function App() {
       <Route path="/about" element={<AboutSection />} />
       <Route path="/ats-checker" element={<ATSChecker />}
 />
+    <Route
+  path="/ats-analysis"
+  element={<ATSAnalysis />}
+/>
+
+<Route
+  path="/skill-detection"
+  element={<SkillDetection />}
+/>
+
+<Route
+  path="/jd-matching"
+  element={<JDMatching />}
+/>
+
     </Routes>
 
     <Footer />
+    
   </div>
 </BrowserRouter>
   );

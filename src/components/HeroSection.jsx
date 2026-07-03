@@ -125,7 +125,7 @@ function HeroSection() {
           initial={{ opacity: 0, x: 80 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative"
+          className="relative z-0"
         >
 
           <motion.div
@@ -174,14 +174,15 @@ function HeroSection() {
               repeat: Infinity
             }}
             className="
-              absolute
-              top-0
-              -left-8
-              bg-white
-              p-4
-              rounded-2xl
-              shadow-xl
-            "
+absolute
+z-0
+top-0
+-left-8
+bg-white
+p-4
+rounded-2xl
+shadow-xl
+"
           >
             🚀 ATS Optimized
           </motion.div>
@@ -195,14 +196,15 @@ function HeroSection() {
               repeat: Infinity
             }}
             className="
-              absolute
-              bottom-0
-              -right-8
-              bg-white
-              p-4
-              rounded-2xl
-              shadow-xl
-            "
+absolute
+z-0
+bottom-0
+-right-8
+bg-white
+p-4
+rounded-2xl
+shadow-xl
+"
           >
             📈 Interview Ready
           </motion.div>
