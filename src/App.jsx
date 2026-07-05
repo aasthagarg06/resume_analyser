@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import {
+  SignedIn,
+  SignedOut,
+  RedirectToSignIn,
+} from "@clerk/clerk-react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/footer";
 import Home from "./pages/Home";
@@ -10,6 +14,8 @@ import ATSChecker from "./pages/ATSChecker";
 import ATSAnalysis from "./pages/ATSAnalysis";
 import SkillDetection from "./pages/SkillDetection";
 import JDMatching from "./pages/JDMatching";
+import Login from "./components/LoginModal";
+import signup from "./components/SignupModal";
 function App() {
   return (
     <BrowserRouter>
@@ -20,7 +26,19 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<AboutSection />} />
-      <Route path="/ats-checker" element={<ATSChecker />}
+      <Route
+  path="/ats-checker"
+  element={
+    <>
+      <SignedIn>
+        <ATSChecker />
+      </SignedIn>
+
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    </>
+  }
 />
     <Route
   path="/ats-analysis"
@@ -47,3 +65,7 @@ function App() {
 }
 
 export default App;
+
+
+
+

@@ -4,15 +4,20 @@ import { TypeAnimation } from "react-type-animation";
 function HeroSection() {
   return (
     <section
-      className="
-        py-24
-        px-6
-        bg-linear-to-br
-        from-slate-600
-        via-blue-50
-        to-violet-100
-      "
-    >
+  className="
+    py-24
+    px-6
+    bg-linear-to-br
+    from-slate-600
+    via-blue-50
+    to-violet-100
+    dark:from-slate-950
+    dark:via-slate-900
+    dark:to-slate-800
+    transition-colors
+    duration-300
+  "
+>
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
 
         {/* Left Side */}
@@ -22,20 +27,25 @@ function HeroSection() {
           transition={{ duration: 0.8 }}
         >
 
-          <div className="
-            inline-block
-            px-4
-            py-2
-            rounded-full
-            bg-blue-100
-            text-blue-700
-            font-medium
-            mb-6
-          ">
+          <div
+  className="
+    inline-block
+    px-4
+    py-2
+    rounded-full
+    bg-blue-100
+    dark:bg-blue-900/40
+    text-blue-700
+    dark:text-blue-300
+    font-medium
+    mb-6
+    transition-colors
+  "
+>
             🚀 AI Powered Resume Analysis
           </div>
 
-          <h1 className="text-6xl font-bold leading-tight text-slate-900">
+          <h1 className="text-6xl font-bold leading-tight text-slate-900 dark:text-white transition-colors">
             Beat ATS Filters &
             <span className="
               bg-linear-to-r
@@ -61,15 +71,17 @@ function HeroSection() {
             speed={50}
             repeat={Infinity}
             className="
-              text-2xl
-              font-semibold
-              text-blue-600
-              block
-              mt-6
-            "
+text-2xl
+font-semibold
+text-blue-600
+dark:text-blue-400
+block
+mt-6
+transition-colors
+"
           />
 
-          <p className="mt-8 text-xl text-slate-600 leading-relaxed">
+          <p className="mt-8 text-xl text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">
             Analyze your resume using AI,
             discover missing skills,
             improve ATS scores,
@@ -101,17 +113,23 @@ function HeroSection() {
 
             <button
               className="
-                px-8
-                py-4
-                rounded-2xl
-                border
-                border-slate-300
-                font-semibold
-                hover:bg-white
-                hover:scale-105
-                transition-all
-                duration-300
-              "
+px-8
+py-4
+rounded-2xl
+border
+border-slate-300
+dark:border-slate-700
+bg-white
+dark:bg-slate-800
+text-slate-800
+dark:text-white
+font-semibold
+hover:bg-slate-100
+dark:hover:bg-slate-700
+hover:scale-105
+transition-all
+duration-300
+"
             >
               Watch Demo
             </button>
@@ -137,14 +155,18 @@ function HeroSection() {
               repeat: Infinity
             }}
             className="
-              bg-white/70
-              backdrop-blur-xl
-              rounded-3xl
-              p-10
-              shadow-2xl
-              border
-              border-white
-            "
+bg-white/70
+dark:bg-slate-900/70
+backdrop-blur-xl
+rounded-3xl
+p-10
+shadow-2xl
+border
+border-white
+dark:border-slate-700
+transition-colors
+duration-300
+"
           >
 
             <div className="text-center">
@@ -153,11 +175,11 @@ function HeroSection() {
                 📄
               </div>
 
-              <h3 className="text-3xl font-bold">
+              <h3 className="text-3xl font-bold text-slate-900 dark:text-white transition-colors">
                 Resume Analyzer
               </h3>
 
-              <p className="mt-4 text-slate-600">
+              <p className="mt-4 text-slate-600 dark:text-slate-300 transition-colors">
                 AI Powered Resume Insights
               </p>
 
@@ -179,9 +201,17 @@ z-0
 top-0
 -left-8
 bg-white
+dark:bg-slate-800
+text-slate-900
+dark:text-white
 p-4
 rounded-2xl
 shadow-xl
+border
+border-slate-200
+dark:border-slate-700
+transition-colors
+duration-300
 "
           >
             🚀 ATS Optimized
@@ -201,9 +231,17 @@ z-0
 bottom-0
 -right-8
 bg-white
+dark:bg-slate-800
+text-slate-900
+dark:text-white
 p-4
 rounded-2xl
 shadow-xl
+border
+border-slate-200
+dark:border-slate-700
+transition-colors
+duration-300
 "
           >
             📈 Interview Ready

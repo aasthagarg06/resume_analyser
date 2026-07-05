@@ -58,3 +58,20 @@ function SignupModal({ isOpen, onClose }) {
 }
 
 export default SignupModal;
+
+
+
+
+// import { SignUp } from "@clerk/clerk-react";
+
+// function Signup() {
+//   return (
+//     <div className="min-h-screen flex justify-center items-center bg-slate-100">
+//       <SignUp />
+//     </div>
+//   );
+// }
+
+// export default Signup;
+
+

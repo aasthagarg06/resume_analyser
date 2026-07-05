@@ -22,18 +22,33 @@ const handleAnalyze = () => {
   setShowResults(true);
 };
   return (
-    <section className="min-h-screen bg-linear-to-br from-slate-100 via-blue-50 to-violet-50 py-16 px-18">
+    <section
+  className="
+    min-h-screen
+    py-16
+    px-18
+    bg-linear-to-br
+    from-slate-100
+    via-blue-50
+    to-violet-50
+    dark:from-slate-950
+    dark:via-slate-900
+    dark:to-slate-950
+    transition-colors
+    duration-300
+  "
+>
 
       <div className="max-w-7xl mx-auto">
 
         {/* Hero */}
         <div className="text-center mb-14">
 
-          <h1 className="text-6xl font-bold text-slate-900">
+          <h1 className="text-6xl font-bold text-slate-900 dark:text-white transition-colors">
             ATS Resume Checker
           </h1>
 
-          <p className="mt-5 text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="mt-5 text-xl text-slate-600 dark:text-slate-300 transition-colors max-w-3xl mx-auto">
             Analyze your resume, improve ATS compatibility,
             detect missing keywords, and receive AI-powered
             recommendations.
@@ -42,7 +57,15 @@ const handleAnalyze = () => {
         </div>
 
         {/* Upload Section */}
-        <div className="bg-white rounded-3xl shadow-xl p-10 mb-12">
+        <div className="bg-white
+dark:bg-slate-900
+rounded-3xl
+shadow-xl
+border
+border-slate-200
+dark:border-slate-700
+transition-all
+duration-300 p-10 mb-12">
 
           <div className="text-center">
 
@@ -50,11 +73,11 @@ const handleAnalyze = () => {
               📄
             </div>
 
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
               Upload Resume
             </h2>
 
-            <p className="text-slate-500 mt-3">
+            <p className="text-slate-500 dark:text-slate-400 mt-3">
               PDF Format Supported
             </p>
 
@@ -71,8 +94,15 @@ const handleAnalyze = () => {
     border-2
     border-dashed
     border-blue-400
-    rounded-3xl
-    bg-blue-50
+dark:border-blue-500
+rounded-3xl
+bg-blue-50
+dark:bg-slate-800
+hover:bg-blue-100
+dark:hover:bg-slate-700
+text-slate-900
+dark:text-white
+transition-all
     cursor-pointer
   "
 />
@@ -88,7 +118,7 @@ const handleAnalyze = () => {
 
 <div className="mt-8">
 
-  <h3 className="text-2xl font-bold mb-4">
+  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
     Job Description
   </h3>
 
@@ -104,8 +134,12 @@ const handleAnalyze = () => {
     p-5
     border-2
     border-slate-200
-    rounded-2xl
-    bg-slate-50
+dark:border-slate-700
+bg-slate-50
+dark:bg-slate-800
+text-slate-900
+dark:text-white
+placeholder:text-slate-400
   "
 />
 
@@ -138,9 +172,15 @@ const handleAnalyze = () => {
         </div>
 
         {/* ATS Score */}
-        <div className="bg-white rounded-3xl shadow-xl p-10 mb-12 text-center">
+        <div className="bg-white
+dark:bg-slate-900
+rounded-3xl
+shadow-xl
+p-10
+mb-12
+text-center">
 
-          <h2 className="text-3xl font-bold mb-6">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
             ATS Score
           </h2>
 
@@ -148,7 +188,7 @@ const handleAnalyze = () => {
             87%
           </div>
 
-          <p className="text-slate-500 mt-4">
+          <p className="text-slate-500 dark:text-slate-400 mt-4">
             Excellent ATS Compatibility
           </p>
 
@@ -165,7 +205,7 @@ const handleAnalyze = () => {
 
             <div className="flex flex-wrap gap-3">
 
-              <span className="bg-green-100 px-4 py-2 rounded-full">
+              <span className="bg-green-100 dark:bg-green-900/40 px-4 py-2 rounded-full">
                 React
               </span>
 
@@ -193,7 +233,7 @@ const handleAnalyze = () => {
 
             <div className="flex flex-wrap gap-3">
 
-              <span className="bg-red-100 px-4 py-2 rounded-full">
+              <span className="bg-red-100 dark:bg-red-900/40 px-4 py-2 rounded-full">
                 Docker
               </span>
 
@@ -220,7 +260,7 @@ const handleAnalyze = () => {
 
           <div className="grid md:grid-cols-4 gap-6">
 
-            <div className="bg-green-50 p-6 rounded-2xl">
+            <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-2xl">
               ✓ Formatting
             </div>
 
@@ -232,7 +272,7 @@ const handleAnalyze = () => {
               ✓ Skills
             </div>
 
-            <div className="bg-red-50 p-6 rounded-2xl">
+            <div className="bg-red-50 dark:bg-red-900/20 p-6 rounded-2xl">
               ✗ Achievements
             </div>
 
@@ -249,7 +289,7 @@ const handleAnalyze = () => {
 
           <div className="space-y-4">
 
-            <div className="bg-blue-50 p-5 rounded-2xl">
+            <div className="bg-blue-50 dark:bg-slate-800 p-5 rounded-2xl">
               Add quantified achievements.
             </div>
 
@@ -290,7 +330,9 @@ const handleAnalyze = () => {
               rounded-2xl
               border-2
               border-blue-600
-              text-blue-600
+dark:border-blue-400
+text-blue-600
+dark:text-blue-400
               font-bold
             "
           >

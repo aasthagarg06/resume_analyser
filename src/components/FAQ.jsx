@@ -47,20 +47,31 @@ function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
 
   return (
-    <section className="py-24 px-6">
+    <section
+      className="
+        py-24
+        px-6
+        bg-white
+        dark:bg-slate-950
+        transition-colors
+        duration-300
+      "
+    >
       <div className="max-w-5xl mx-auto">
+
+        {/* Heading */}
 
         <div className="text-center mb-16">
 
-          <span className="text-blue-600 font-semibold tracking-wider">
+          <span className="text-blue-600 dark:text-blue-400 font-semibold tracking-wider transition-colors">
             FAQ
           </span>
 
-          <h2 className="text-5xl font-bold mt-4 text-slate-900">
+          <h2 className="text-5xl font-bold mt-4 text-slate-900 dark:text-white transition-colors">
             Frequently Asked Questions
           </h2>
 
-          <p className="mt-5 text-slate-600 text-lg max-w-3xl mx-auto">
+          <p className="mt-5 text-slate-600 dark:text-slate-300 text-lg max-w-3xl mx-auto transition-colors">
             Everything you need to know about ATS scoring,
             resume optimization, job description matching,
             and improving your interview opportunities.
@@ -68,16 +79,23 @@ function FAQ() {
 
         </div>
 
+        {/* FAQ Cards */}
+
         <div className="space-y-5">
 
           {faqs.map((faq, index) => (
+
             <div
               key={index}
               className="
                 bg-white
+                dark:bg-slate-900
                 rounded-3xl
                 shadow-lg
                 hover:shadow-2xl
+                border
+                border-slate-200
+                dark:border-slate-700
                 transition-all
                 duration-300
                 overflow-hidden
@@ -86,9 +104,7 @@ function FAQ() {
 
               <button
                 onClick={() =>
-                  setOpenIndex(
-                    openIndex === index ? null : index
-                  )
+                  setOpenIndex(openIndex === index ? null : index)
                 }
                 className="
                   w-full
@@ -100,29 +116,32 @@ function FAQ() {
                 "
               >
 
-                <h3 className="text-xl font-semibold text-slate-900">
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white transition-colors">
                   {faq.question}
                 </h3>
 
-                <span className="text-3xl text-blue-600">
+                <span className="text-3xl text-blue-600 dark:text-blue-400 transition-colors">
                   {openIndex === index ? "−" : "+"}
                 </span>
 
               </button>
 
               {openIndex === index && (
+
                 <div className="px-7 pb-7">
 
-                  <div className="h-px bg-slate-200 mb-5"></div>
+                  <div className="h-px bg-slate-200 dark:bg-slate-700 mb-5 transition-colors"></div>
 
-                  <p className="text-slate-600 leading-8 text-lg">
+                  <p className="text-slate-600 dark:text-slate-300 leading-8 text-lg transition-colors">
                     {faq.answer}
                   </p>
 
                 </div>
+
               )}
 
             </div>
+
           ))}
 
         </div>
