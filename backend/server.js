@@ -1,22 +1,25 @@
-const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
+import analyzeRoutes from "./routes/analyzeRoutes.js";
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+const result = dotenv.config();
+
+console.log(result);
 
 const app = express();
 
-// Middleware
 app.use(cors());
-app.use(express.json());
 
-// Home Route
+app.use(express.json());
+app.use("/api", analyzeRoutes);
+
+const PORT = 5000;
+
 app.get("/", (req, res) => {
-  res.send("🚀 ResumeIQ Backend is Running!");
+    res.send("Resume Analyzer Backend Running");
 });
 
-// Port
-const PORT = process.env.PORT || 5000;
-
-// Start Server
 app.listen(PORT, () => {
-  console.log(`✅ Server is running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
