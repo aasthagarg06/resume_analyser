@@ -1,7 +1,110 @@
 @import "tailwindcss";
 
+/* Tell Tailwind that dark mode is controlled by the .dark class */
 @custom-variant dark (&:where(.dark, .dark *));
 
-button{
-    cursor:pointer;
+/* -----------------------------
+   Design Tokens
+----------------------------- */
+
+@theme {
+
+  /* Brand */
+
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #d9e6ff;
+  --color-brand-400: #6690ff;
+  --color-brand-500: #3b6bf5;
+  --color-brand-600: #2d54cc;
+  --color-brand-700: #233f9c;
+
+  /* Surface */
+
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #0b0d12;
+  --color-surface-card: #f8f9fb;
+  --color-surface-card-dark: #131620;
+
+  /* Semantic */
+
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* Fonts */
+
+  --font-display: Inter, system-ui, sans-serif;
+  --font-sans: Inter, system-ui, sans-serif;
+
+  /* Radius */
+
+  --radius-xl: 14px;
+  --radius-2xl: 20px;
+}
+
+/* -----------------------------
+   Base
+----------------------------- */
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:var(--font-sans);
+}
+
+/* -----------------------------
+   Custom Shadows
+----------------------------- */
+
+@utility shadow-card {
+  box-shadow: 0 2px 8px rgba(0,0,0,.04),
+              0 1px 2px rgba(0,0,0,.03);
+}
+
+@utility shadow-card-dark {
+  box-shadow:0 2px 8px rgba(0,0,0,.40);
+}
+
+@utility shadow-glow {
+  box-shadow:0 0 0 4px rgba(59,107,245,.15);
+}
+
+/* -----------------------------
+   Animations
+----------------------------- */
+
+@keyframes fadeUp {
+
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+@keyframes pulseSoft {
+
+  0%,100%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.55;
+  }
+
+}
+
+@utility animate-fadeUp{
+  animation:fadeUp .4s ease-out both;
+}
+
+@utility animate-pulseSoft{
+  animation:pulseSoft 1.6s ease-in-out infinite;
 }

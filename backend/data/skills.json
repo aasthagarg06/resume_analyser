@@ -1,0 +1,170 @@
+{
+  "React": {
+    "aliases": [
+      "react",
+      "reactjs",
+      "react.js"
+    ],
+    "category": "Frontend"
+  },
+
+  "Angular": {
+    "aliases": [
+      "angular",
+      "angularjs"
+    ],
+    "category": "Frontend"
+  },
+
+  "Vue.js": {
+    "aliases": [
+      "vue",
+      "vuejs",
+      "vue.js"
+    ],
+    "category": "Frontend"
+  },
+
+  "HTML": {
+    "aliases": [
+      "html",
+      "html5"
+    ],
+    "category": "Frontend"
+  },
+
+  "CSS": {
+    "aliases": [
+      "css",
+      "css3"
+    ],
+    "category": "Frontend"
+  },
+
+  "JavaScript": {
+    "aliases": [
+      "javascript",
+      "js",
+      "ecmascript"
+    ],
+    "category": "Language"
+  },
+
+  "TypeScript": {
+    "aliases": [
+      "typescript",
+      "ts"
+    ],
+    "category": "Language"
+  },
+
+  "Node.js": {
+    "aliases": [
+      "node",
+      "nodejs",
+      "node.js"
+    ],
+    "category": "Backend"
+  },
+
+  "Express": {
+    "aliases": [
+      "express",
+      "expressjs",
+      "express.js"
+    ],
+    "category": "Backend"
+  },
+
+  "MongoDB": {
+    "aliases": [
+      "mongodb",
+      "mongo"
+    ],
+    "category": "Database"
+  },
+
+  "MySQL": {
+    "aliases": [
+      "mysql"
+    ],
+    "category": "Database"
+  },
+
+  "PostgreSQL": {
+    "aliases": [
+      "postgres",
+      "postgresql"
+    ],
+    "category": "Database"
+  },
+
+  "Git": {
+    "aliases": [
+      "git"
+    ],
+    "category": "DevOps"
+  },
+
+  "Docker": {
+    "aliases": [
+      "docker"
+    ],
+    "category": "DevOps"
+  },
+
+  "Kubernetes": {
+    "aliases": [
+      "kubernetes",
+      "k8s"
+    ],
+    "category": "DevOps"
+  },
+
+  "AWS": {
+    "aliases": [
+      "aws",
+      "amazon web services"
+    ],
+    "category": "Cloud"
+  },
+
+  "Azure": {
+    "aliases": [
+      "azure",
+      "microsoft azure"
+    ],
+    "category": "Cloud"
+  },
+
+  "Python": {
+    "aliases": [
+      "python",
+      "py"
+    ],
+    "category": "Language"
+  },
+
+  "Java": {
+    "aliases": [
+      "java"
+    ],
+    "category": "Language"
+  },
+
+  "C++": {
+    "aliases": [
+      "c++",
+      "cpp"
+    ],
+    "category": "Language"
+  },
+
+  "C#": {
+    "aliases": [
+      "c#",
+      "csharp"
+    ],
+    "category": "Language"
+  }
+}

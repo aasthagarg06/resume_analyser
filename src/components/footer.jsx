@@ -1,5 +1,39 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 function Footer() {
+  const [email, setEmail] = useState("");
+const [loading, setLoading] = useState(false);
+const [success, setSuccess] = useState(false);
+const [error, setError] = useState("");
+
+const handleSubscribe = async () => {
+
+  if (!email.trim()) {
+    setError("Please enter your email.");
+    return;
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
+    setError("Please enter a valid email.");
+    return;
+  }
+
+  setError("");
+  setLoading(true);
+
+  // Fake API request
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  setLoading(false);
+  setSuccess(true);
+  setEmail("");
+
+  setTimeout(() => {
+    setSuccess(false);
+  }, 3000);
+};
   return (
     <footer className="bg-slate-950 text-white">
 
@@ -120,36 +154,62 @@ function Footer() {
             </p>
 
             <input
-              type="email"
-              placeholder="Enter your email"
-              className="
-                w-full
-                p-3
-                rounded-xl
-                bg-slate-800
-                border
-                border-slate-700
-                text-white
-                outline-none
-              "
-            />
+  type="email"
+  placeholder="Enter your email"
+  value={email}
+  onChange={(e) => {
+    setEmail(e.target.value);
+    setError("");
+  }}
+  className="
+    w-full
+    p-3
+    rounded-xl
+    bg-slate-800
+    border
+    border-slate-700
+    text-white
+    outline-none
+  "
+/>
+
+
+{error && (
+  <p className="text-red-400 text-sm mt-2">
+    {error}
+  </p>
+)}
 
             <button
-              className="
-                w-full
-                mt-3
-                py-3
-                rounded-xl
-                bg-linear-to-r
-                from-blue-600
-                to-violet-600
-                font-semibold
-                hover:scale-105
-                transition
-              "
-            >
-              Subscribe
-            </button>
+  onClick={handleSubscribe}
+  disabled={loading}
+  className="
+    w-full
+    mt-3
+    py-3
+    rounded-xl
+    bg-linear-to-r
+    from-blue-600
+    to-violet-600
+    font-semibold
+    hover:scale-105
+    transition
+    disabled:opacity-60
+  "
+>
+  {loading ? "Subscribing..." : "Subscribe"}
+</button>
+
+
+{success && (
+  <div className="mt-4 rounded-xl bg-green-500/20 border border-green-500 p-3 text-green-300 text-center">
+    ✅ Thanks for subscribing!
+
+    <p className="text-sm mt-1 text-green-200">
+      Newsletter integration will be available in a future update.
+    </p>
+  </div>
+)}
 
           </div>
 

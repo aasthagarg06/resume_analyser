@@ -1,20 +1,46 @@
+// middleware/upload.js
+
 import multer from "multer";
+import path from "path";
 
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage();
 
-    destination: function (req, file, cb) {
+export const ALLOWED_MIME_TYPES = [
+  "application/pdf",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
 
-        cb(null, "uploads/");
-    },
+export const ALLOWED_EXTENSIONS = [
+  ".pdf",
+  ".docx",
+];
 
-    filename: function (req, file, cb) {
+export const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
-        cb(null, Date.now() + "-" + file.originalname);
+function fileFilter(req, file, cb) {
+  const ext = path.extname(file.originalname).toLowerCase();
 
-    }
+  const mimeOk = ALLOWED_MIME_TYPES.includes(file.mimetype);
+  const extOk = ALLOWED_EXTENSIONS.includes(ext);
 
+  if (!mimeOk || !extOk) {
+    const err = new Error("Only PDF and DOCX files are allowed.");
+    err.code = "INVALID_FILE_TYPE";
+    err.statusCode = 400;
+
+    return cb(err, false);
+  }
+
+  cb(null, true);
+}
+
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: {
+    fileSize: MAX_FILE_SIZE_BYTES,
+    files: 1,
+  },
 });
 
-const upload = multer({ storage });
-
-export default upload;
+export const uploadResume = upload.single("resume");

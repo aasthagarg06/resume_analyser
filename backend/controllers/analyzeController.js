@@ -1,11 +1,23 @@
 import fs from "fs";
 import { parsePDF } from "../utils/pdfParser.js";
+import buildResume from "../core/resumeBuilder.js";
 import { analyzeWithGemini } from "../services/geminiService.js";
 export const analyzeResume = async (req, res) => {
   try {
 
     const resumeText = await parsePDF(req.file.path);
+const resume = buildResume(resumeText);
+console.log("\n========== RESUME OBJECT ==========\n");
 
+console.log(resume);
+
+console.log("\n========== SECTIONS ==========\n");
+
+console.log(resume.sections);
+
+console.log("\n========== TOKENS ==========\n");
+
+console.log(resume.tokens);
     const aiResponse = await analyzeWithGemini(
       resumeText,
       req.body.jobDescription
@@ -25,25 +37,7 @@ console.log("VALUE:", aiResponse);
   });
 }
 
-if (typeof aiResponse !== "string") {
-  console.log("Not a string:", aiResponse);
 
-  return res.json({
-    success: false,
-    aiResponse,
-    type: typeof aiResponse,
-  });
-}
-
-if (typeof aiResponse !== "string") {
-  console.log("Not a string:", aiResponse);
-
-  return res.json({
-    success: false,
-    aiResponse,
-    type: typeof aiResponse,
-  });
-}
 
 const cleaned = aiResponse.trim();
 

@@ -1,11 +1,61 @@
-import { useState } from "react";
-
+import { useState, useRef } from "react";
+import { extractText } from "../utils/extractText";
+import { validateResume } from "../utils/fileValidation";
+import { UploadCloud, CheckCircle2, X } from "lucide-react";
 function UploadResume() {
   const [file, setFile] = useState(null);
+const [dragActive, setDragActive] = useState(false);
 
-  function handleChange(event) {
-    setFile(event.target.files[0]);
+const inputRef = useRef(null);
+
+const [resumeText, setResumeText] = useState("");
+
+const [loading, setLoading] = useState(false);
+
+const [error, setError] = useState("");
+
+
+  async function handleChange(event) {
+
+  const selectedFile = event.target.files[0];
+
+  if (!selectedFile) return;
+
+  const validationError = validateResume(selectedFile);
+
+  if (validationError) {
+    setError(validationError);
+    setFile(null);
+    return;
   }
+
+  setError("");
+  setLoading(true);
+
+  try {
+
+    const extracted = await extractText(selectedFile);
+
+    setResumeText(extracted);
+
+    setFile(selectedFile);
+
+  }
+
+  catch (err) {
+  console.error("FULL ERROR:", err);
+
+  alert(err.message);
+
+  setError(err.message);
+}
+  finally {
+
+    setLoading(false);
+
+  }
+
+}
 
   return (
     <section
@@ -57,7 +107,7 @@ function UploadResume() {
 
           <input
             type="file"
-            accept=".pdf"
+            accept=".pdf,.docx"
             onChange={handleChange}
             className="
               w-full
@@ -80,6 +130,40 @@ function UploadResume() {
           />
 
         </div>
+
+        {
+loading && (
+
+<div className="mt-6 text-center">
+
+<p className="text-blue-600 font-semibold">
+
+Reading Resume...
+
+</p>
+
+</div>
+
+)
+}
+
+
+
+{
+error && (
+
+<div className="mt-6 rounded-xl bg-red-100 dark:bg-red-900/20 p-4">
+
+<p className="text-red-600">
+
+{error}
+
+</p>
+
+</div>
+
+)
+}
 
         {/* Supported Formats */}
         <div className="mt-4 text-center text-slate-500 dark:text-slate-400 transition-colors">
@@ -147,6 +231,40 @@ function UploadResume() {
               🚀 Analyze Resume
             </button>
 
+{
+resumeText && (
+
+<div className="mt-8">
+
+<h3 className="font-bold text-slate-900 dark:text-white mb-3">
+
+Extracted Resume Text
+
+</h3>
+
+<textarea
+rows={12}
+value={resumeText}
+readOnly
+className="
+w-full
+rounded-2xl
+border
+border-slate-300
+dark:border-slate-700
+bg-slate-50
+dark:bg-slate-800
+p-4
+text-sm
+text-slate-700
+dark:text-slate-200
+"
+/>
+
+</div>
+
+)
+}
           </div>
         )}
 

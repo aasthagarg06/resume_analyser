@@ -29,19 +29,67 @@ ${jobDescription}
 Return exactly:
 
 {
-  "atsScore": 0,
-  "matchedSkills": [],
-  "missingSkills": [],
+  "overallScore": 0,
+  "formatting": {
+    "score": 0,
+    "feedback": "",
+    "checks": {
+      "contactInfo": true,
+      "email": true,
+      "phone": true,
+      "linkedin": false,
+      "github": false,
+      "headings": true,
+      "bulletPoints": true,
+      "atsFriendly": true,
+      "tables": false,
+      "images": false
+    }
+  },
+  "keywordMatch": {
+    "score": 0,
+    "matched": [],
+    "missing": []
+  },
+  "skills": {
+    "score": 0,
+    "matchedSkills": [],
+    "missingSkills": []
+  },
+  "sections": {
+    "score": 0,
+    "summary": true,
+    "education": true,
+    "experience": true,
+    "projects": true,
+    "skills": true,
+    "certifications": false
+  },
+  "experience": {
+    "score": 0,
+    "feedback": ""
+  },
+  "projects": {
+    "score": 0,
+    "feedback": ""
+  },
+  "grammar": {
+    "score": 0
+  },
+  "readability": {
+    "score": 0
+  },
   "strengths": [],
   "weaknesses": [],
-  "suggestions": []
+  "suggestions": [],
+  "summary": ""
 }
 `;
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: prompt,
-  });
+  model: "gemini-2.5-flash",
+  contents: prompt,
+});
 
   return response.text;
 }

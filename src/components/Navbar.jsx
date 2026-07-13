@@ -10,6 +10,12 @@ import {
 } from "@clerk/clerk-react";
 
 function Navbar() {
+  const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
   return (
     <>
       <nav
@@ -60,11 +66,21 @@ function Navbar() {
           >
 
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
-              <Link to="/">Home</Link>
+              <Link
+  to="/"
+  onClick={scrollToTop}
+>
+  Home
+</Link>
             </li>
 
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
-              <Link to="/ats-checker">ATS Checker</Link>
+              <Link
+  to="/ats-checker"
+  onClick={scrollToTop}
+>
+  ATS Checker
+</Link>
             </li>
 
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
@@ -80,7 +96,12 @@ function Navbar() {
             </li>
 
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
-              <Link to="/about">About</Link>
+              <Link
+  to="/about"
+  onClick={scrollToTop}
+>
+  About
+</Link>
             </li>
 
           </ul>
