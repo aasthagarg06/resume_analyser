@@ -4,24 +4,27 @@ import { TypeAnimation } from "react-type-animation";
 function HeroSection() {
   return (
     <section
-  className="
-    py-24
-    px-6
-    bg-linear-to-br
-    from-slate-600
-    via-blue-50
-    to-violet-100
-    dark:from-slate-950
-    dark:via-slate-900
-    dark:to-slate-800
-    transition-colors
-    duration-300
-  "
+className="
+relative
+overflow-hidden
+min-h-[calc(100vh-72px)]
+flex
+items-center
+px-6
+bg-slate-50
+dark:bg-[#020617]
+"
 >
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+
+  <div className="absolute inset-0 overflow-hidden">
+  <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[140px]" />
+
+  <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[140px]" />
+</div>
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
         {/* Left Side */}
-        <motion.div
+        <motion.div className="max-w-xl"
           initial={{ opacity: 0, x: -80 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -38,15 +41,16 @@ function HeroSection() {
     text-blue-700
     dark:text-blue-300
     font-medium
-    mb-6
+    mb-4
     transition-colors
   "
 >
             🚀 AI Powered Resume Analysis
           </div>
 
-          <h1 className="text-6xl font-bold leading-tight text-slate-900 dark:text-white transition-colors">
-            Beat ATS Filters &
+          <h1 className="text-[56px]
+leading-[1.1] font-bold leading-tight text-slate-900 dark:text-white transition-colors">
+            From Resume to Offer: <br />
             <span className="
               bg-linear-to-r
               from-blue-600
@@ -54,7 +58,7 @@ function HeroSection() {
               bg-clip-text
               text-transparent
             ">
-              {" "}Get More Interviews
+              {" "}Powered By AI
             </span>
           </h1>
 
@@ -76,19 +80,22 @@ font-semibold
 text-blue-600
 dark:text-blue-400
 block
-mt-6
+mt-4
 transition-colors
+py-0
 "
           />
 
-          <p className="mt-8 text-xl text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">
+          <p className="mt-5
+text-lg
+max-w-lg text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">
             Analyze your resume using AI,
             discover missing skills,
             improve ATS scores,
             and maximize interview opportunities.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-4">
 
             <button
               className="
@@ -254,4 +261,4 @@ duration-300
   );
 }
 
-export default HeroSection;
+export default HeroSection

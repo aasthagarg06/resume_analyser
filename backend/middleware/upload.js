@@ -1,7 +1,7 @@
-// middleware/upload.js
-
 import multer from "multer";
 import path from "path";
+
+console.log("✅ UPLOAD MIDDLEWARE LOADED");
 
 const storage = multer.memoryStorage();
 
@@ -15,7 +15,7 @@ export const ALLOWED_EXTENSIONS = [
   ".docx",
 ];
 
-export const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+export const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 
 function fileFilter(req, file, cb) {
   const ext = path.extname(file.originalname).toLowerCase();
@@ -44,3 +44,5 @@ const upload = multer({
 });
 
 export const uploadResume = upload.single("resume");
+
+export default upload;

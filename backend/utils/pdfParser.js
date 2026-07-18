@@ -1,33 +1,15 @@
-// import fs from "fs";
-// import pdfParse from "pdf-parse";
-
-// export async function parsePDF(filePath) {
-//   try {
-//     const dataBuffer = fs.readFileSync(filePath);
-//     const data = await pdfParse(dataBuffer);
-//     return data.text;
-//   } catch (error) {
-//     throw new Error("Unable to parse PDF");
-//   }
-// }
-
-
-
-import fs from "fs";
 import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
 const pdfParse = require("pdf-parse");
 
-export async function parsePDF(filePath) {
-    try {
-        const dataBuffer = fs.readFileSync(filePath);
+export async function parsePDF(buffer) {
+  try {
+    const data = await pdfParse(buffer);
 
-        const data = await pdfParse(dataBuffer);
-
-        return data.text;
-
-    } catch (error) {
-        throw new Error("Unable to parse PDF");
-    }
+    return data.text;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Unable to parse PDF");
+  }
 }
