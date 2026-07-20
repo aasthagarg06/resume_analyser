@@ -113,6 +113,7 @@ function FAQ() {
                   flex
                   justify-between
                   items-center
+                  group
                 "
               >
 
@@ -120,25 +121,21 @@ function FAQ() {
                   {faq.question}
                 </h3>
 
-                <span className="text-3xl text-blue-600 dark:text-blue-400 transition-colors">
+                <span className={`text-3xl text-blue-600 dark:text-blue-400 transition-transform duration-500 ease-out ${openIndex === index ? "rotate-45 scale-110" : ""}`}>
                   {openIndex === index ? "−" : "+"}
                 </span>
 
               </button>
 
-              {openIndex === index && (
+              <div className={`px-7 pb-7 overflow-hidden transition-all duration-500 ease-out ${openIndex === index ? "max-h-72 opacity-100" : "max-h-0 opacity-0"}`}>
 
-                <div className="px-7 pb-7">
+                <div className="h-px bg-slate-200 dark:bg-slate-700 mb-5 transition-colors"></div>
 
-                  <div className="h-px bg-slate-200 dark:bg-slate-700 mb-5 transition-colors"></div>
+                <p className={`text-slate-600 dark:text-slate-300 leading-8 text-lg transition-all duration-500 ease-out ${openIndex === index ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0"}`}>
+                  {faq.answer}
+                </p>
 
-                  <p className="text-slate-600 dark:text-slate-300 leading-8 text-lg transition-colors">
-                    {faq.answer}
-                  </p>
-
-                </div>
-
-              )}
+              </div>
 
             </div>
 

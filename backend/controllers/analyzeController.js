@@ -33,10 +33,7 @@ export const analyzeResume = async (req, res) => {
     console.log(req.file);
     console.log(req.body);
 
-    const result = await analyzeResumeService(
-      req.file,
-      req.body.jobDescription
-    );
+    const result = await analyzeResumeService(req.file);
 
     res.json({
       success: true,

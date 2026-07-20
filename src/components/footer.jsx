@@ -2,38 +2,41 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 function Footer() {
   const [email, setEmail] = useState("");
-const [loading, setLoading] = useState(false);
-const [success, setSuccess] = useState(false);
-const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
-const handleSubscribe = async () => {
+  const handleSubscribe = async (event) => {
+    if (event?.preventDefault) {
+      event.preventDefault();
+    }
 
-  if (!email.trim()) {
-    setError("Please enter your email.");
-    return;
-  }
+    if (!email.trim()) {
+      setError("Please enter your email.");
+      return;
+    }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!emailRegex.test(email)) {
-    setError("Please enter a valid email.");
-    return;
-  }
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid email.");
+      return;
+    }
 
-  setError("");
-  setLoading(true);
+    setError("");
+    setLoading(true);
 
-  // Fake API request
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Fake API request
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  setLoading(false);
-  setSuccess(true);
-  setEmail("");
+    setLoading(false);
+    setSuccess(true);
+    setEmail("");
 
-  setTimeout(() => {
-    setSuccess(false);
-  }, 3000);
-};
+    setTimeout(() => {
+      setSuccess(false);
+    }, 4000);
+  };
   return (
     <footer className="bg-slate-950 text-white">
 
@@ -93,20 +96,12 @@ const handleSubscribe = async () => {
 
             <ul className="space-y-3 text-slate-400">
 
-              <li> 
+              <li>
                 <Link to="/ats-checker" className="hover:text-white transition"> ATS Checker </Link>
-</li>
-
-              <li className="hover:text-white cursor-pointer">
-                Skill Detection
               </li>
 
-              <li className="hover:text-white cursor-pointer">
-                JD Matching
-              </li>
-
-              <li className="hover:text-white cursor-pointer">
-                AI Suggestions
+              <li>
+                <Link to="/jd-matching" className="hover:text-white transition"> JD Matching </Link>
               </li>
 
             </ul>
@@ -123,19 +118,23 @@ const handleSubscribe = async () => {
             <ul className="space-y-3 text-slate-400">
 
               <li>
-  <Link to="/" className="hover:text-white transition">Home</Link>
-</li>
-
-<li>
-  <Link to="/about" className="hover:text-white transition"> About Us </Link>
-</li>
-
-              <li className="hover:text-white cursor-pointer">
-                Dashboard
+                <Link to="/" className="hover:text-white transition">Home</Link>
               </li>
 
-              <li className="hover:text-white cursor-pointer">
-                Contact
+              <li>
+                <Link to="/about" className="hover:text-white transition"> About Us </Link>
+              </li>
+
+              <li>
+                <Link to="/dashboard" className="hover:text-white transition">
+                  Dashboard
+                </Link>
+              </li>
+
+              <li>
+                <Link to="/contact" className="hover:text-white transition">
+                  Contact
+                </Link>
               </li>
 
             </ul>
@@ -153,63 +152,64 @@ const handleSubscribe = async () => {
               Get career tips and resume insights.
             </p>
 
-            <input
-  type="email"
-  placeholder="Enter your email"
-  value={email}
-  onChange={(e) => {
-    setEmail(e.target.value);
-    setError("");
-  }}
-  className="
-    w-full
-    p-3
-    rounded-xl
-    bg-slate-800
-    border
-    border-slate-700
-    text-white
-    outline-none
-  "
-/>
+            <form onSubmit={handleSubscribe}>
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError("");
+                }}
+                className="
+                  w-full
+                  p-3
+                  rounded-xl
+                  bg-slate-800
+                  border
+                  border-slate-700
+                  text-white
+                  outline-none
+                "
+              />
+
+              {error && (
+                <p className="text-red-400 text-sm mt-2">
+                  {error}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="
+                  w-full
+                  mt-3
+                  py-3
+                  rounded-xl
+                  bg-linear-to-r
+                  from-blue-600
+                  to-violet-600
+                  font-semibold
+                  hover:scale-105
+                  transition
+                  disabled:opacity-60
+                "
+              >
+                {loading ? "Subscribing..." : "Subscribe"}
+              </button>
+            </form>
 
 
-{error && (
-  <p className="text-red-400 text-sm mt-2">
-    {error}
-  </p>
-)}
+            {success && (
+              <div className="mt-4 rounded-xl bg-green-500/20 border border-green-500 p-3 text-green-300 text-center">
+                ✅ Thanks for subscribing!
 
-            <button
-  onClick={handleSubscribe}
-  disabled={loading}
-  className="
-    w-full
-    mt-3
-    py-3
-    rounded-xl
-    bg-linear-to-r
-    from-blue-600
-    to-violet-600
-    font-semibold
-    hover:scale-105
-    transition
-    disabled:opacity-60
-  "
->
-  {loading ? "Subscribing..." : "Subscribe"}
-</button>
-
-
-{success && (
-  <div className="mt-4 rounded-xl bg-green-500/20 border border-green-500 p-3 text-green-300 text-center">
-    ✅ Thanks for subscribing!
-
-    <p className="text-sm mt-1 text-green-200">
-      Newsletter integration will be available in a future update.
-    </p>
-  </div>
-)}
+                <p className="text-sm mt-1 text-green-200">
+                  Newsletter integration will be available in a future update.
+                </p>
+              </div>
+            )}
 
           </div>
 

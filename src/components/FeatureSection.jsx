@@ -34,7 +34,7 @@ function FeatureSection() {
         "Skill Categories",
       ],
       color: "from-violet-500 to-purple-500",
-      link: "/skill-detection",
+      link: "/ats-checker",
     },
 
     {

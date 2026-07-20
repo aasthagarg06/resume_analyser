@@ -14,7 +14,7 @@ const skills = JSON.parse(
 
 export function skillMatcher(resume, jobDescription) {
   const resumeText = resume.normalizedText.toLowerCase();
-  const jdText = jobDescription.toLowerCase();
+  const jdText = (jobDescription || "").toLowerCase();
 
   const matchedSkills = [];
   const missingSkills = [];

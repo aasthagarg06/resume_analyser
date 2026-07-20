@@ -7,89 +7,166 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-export async function analyzeWithGemini(resumeText, jobDescription) {
+export async function analyzeATS({
+
+  resumeText,
+
+  overallScore,
+
+  formatting,
+
+  contact,
+
+  sections,
+
+  skills,
+
+  dates,
+
+  experience,
+
+  projects
+
+}) {
+
   const prompt = `
-You are an ATS Resume Analyzer.
 
-Analyze the resume against the job description.
+You are an expert ATS Resume Reviewer.
 
-IMPORTANT RULES:
-- Return ONLY ONE valid JSON object.
-- Do NOT return markdown.
-- Do NOT use \`\`\`.
-- Do NOT explain anything.
-- Do NOT return multiple JSON objects.
+IMPORTANT RULES
 
-Resume:
+You are NOT allowed to calculate the ATS score.
+
+The ATS score has already been calculated by the system.
+
+DO NOT change it.
+
+DO NOT recalculate it.
+
+DO NOT invent missing skills.
+
+DO NOT invent future dates.
+
+DO NOT claim contact information is missing if the analysis says it exists.
+
+Use ONLY the structured analysis below.
+
+--------------------------------------------------
+
+ATS SCORE
+
+${overallScore}
+
+--------------------------------------------------
+
+FORMATTING
+
+${JSON.stringify(formatting, null, 2)}
+
+--------------------------------------------------
+
+CONTACT INFORMATION
+
+${JSON.stringify(contact, null, 2)}
+
+--------------------------------------------------
+
+SECTIONS
+
+${JSON.stringify(sections, null, 2)}
+
+--------------------------------------------------
+
+SKILLS
+
+${JSON.stringify(skills, null, 2)}
+
+--------------------------------------------------
+
+DATE ANALYSIS
+
+${JSON.stringify(dates, null, 2)}
+
+--------------------------------------------------
+
+EXPERIENCE
+
+${JSON.stringify(experience, null, 2)}
+
+--------------------------------------------------
+
+PROJECTS
+
+${JSON.stringify(projects, null, 2)}
+
+--------------------------------------------------
+
+RESUME
+
 ${resumeText}
 
-Job Description:
-${jobDescription}
+--------------------------------------------------
 
-Return exactly:
+TASK
+
+Using ONLY the information above,
+
+generate
+
+1. Strengths
+
+2. Weaknesses
+
+3. Suggestions
+
+4. Professional Summary
+
+Rules
+
+• Do not invent facts.
+
+• Do not mention missing GitHub if GitHub exists.
+
+• Do not mention future dates unless date analysis reports them.
+
+• Do not mention placeholder information.
+
+• Keep suggestions practical.
+
+• Keep strengths resume-specific.
+
+• Keep weaknesses genuine.
+
+Return ONLY JSON.
 
 {
-  "overallScore": 0,
-  "formatting": {
-    "score": 0,
-    "feedback": "",
-    "checks": {
-      "contactInfo": true,
-      "email": true,
-      "phone": true,
-      "linkedin": false,
-      "github": false,
-      "headings": true,
-      "bulletPoints": true,
-      "atsFriendly": true,
-      "tables": false,
-      "images": false
-    }
-  },
-  "keywordMatch": {
-    "score": 0,
-    "matched": [],
-    "missing": []
-  },
-  "skills": {
-    "score": 0,
-    "matchedSkills": [],
-    "missingSkills": []
-  },
-  "sections": {
-    "score": 0,
-    "summary": true,
-    "education": true,
-    "experience": true,
-    "projects": true,
-    "skills": true,
-    "certifications": false
-  },
-  "experience": {
-    "score": 0,
-    "feedback": ""
-  },
-  "projects": {
-    "score": 0,
-    "feedback": ""
-  },
-  "grammar": {
-    "score": 0
-  },
-  "readability": {
-    "score": 0
-  },
-  "strengths": [],
-  "weaknesses": [],
-  "suggestions": [],
-  "summary": ""
+
+"strengths":[
+"..."
+],
+
+"weaknesses":[
+"..."
+],
+
+"suggestions":[
+"..."
+],
+
+"summary":""
+
 }
+
 `;
 
   const response = await ai.models.generateContent({
-  model: "gemini-2.5-flash",
-  contents: prompt,
-});
+
+    model: "gemini-2.5-flash",
+
+    contents: prompt
+
+  });
 
   return response.text;
+
 }

@@ -1,70 +1,61 @@
 import { parsePDF } from "../utils/pdfParser.js";
-
 import buildResume from "../core/resumeBuilder.js";
 
 import { formattingAnalyzer } from "../analysis/formattingAnalyzer.js";
-
-import { keywordMatcher } from "../matching/keywordMatcher.js";
-
-import { skillMatcher } from "../matching/skillMatcher.js";
-
+import { contactAnalyzer } from "../analysis/contactAnalyzer.js";
+import { sectionAnalyzer } from "../analysis/sectionAnalyzer.js";
+import { dateAnalyzer } from "../analysis/dateAnalyzer.js";
 import { calculateScore } from "../analysis/scoreCalculator.js";
 
-import { analyzeWithGemini } from "./geminiService.js";
+import { skillExtractor } from "../matching/skillExtractor.js";
+
+import { analyzeATS } from "./geminiService.js";
 
 import { generateReport } from "../reporting/reportGenerator.js";
 
-export async function analyzeResumeService(file,jobDescription){
+export async function analyzeResumeService(file) {
 
-    const resumeText=await parsePDF(file.buffer);
+    // Extract Resume Text
+    const parsed = await parsePDF(file.buffer);
 
-    const resume=buildResume(resumeText);
+    const resumeText = parsed.text;
 
-    const formatting=formattingAnalyzer(resume);
+    const links = parsed.links;
 
-    const keywords=keywordMatcher(
+    // Build Resume Object
+    const resume = buildResume(resumeText);
 
-        resume,
+    // Rule-Based Analysis
+    const formatting = formattingAnalyzer(resume);
 
-        jobDescription
+    const contact = contactAnalyzer(resumeText, links);
 
-    );
+    const sections = sectionAnalyzer(resumeText);
 
-    const skills=skillMatcher(
+    const skills = skillExtractor(resumeText);
 
-        resume,
+    const dates = dateAnalyzer(resumeText);
 
-        jobDescription
-
-    );
-
-    const sections={
-
-        score:resume.sections?100:0
-
+    const experience = {
+        score: resume.sections?.experience ? 100 : 50
     };
 
-    const experience={
-
-        score:resume.sections?.experience?100:50
-
+    const projects = {
+        score: resume.sections?.projects ? 100 : 50
     };
 
-    const projects={
-
-        score:resume.sections?.projects?100:50
-
-    };
-
-    const overallScore=calculateScore({
+    // Calculate ATS Score
+    const overallScore = calculateScore({
 
         formatting,
 
-        keywords,
+        contact,
+
+        sections,
 
         skills,
 
-        sections,
+        dates,
 
         experience,
 
@@ -72,21 +63,60 @@ export async function analyzeResumeService(file,jobDescription){
 
     });
 
-    const gemini=JSON.parse(
+    console.log("========== ATS ANALYSIS ==========");
+    console.log({
+        formatting,
+        contact,
+        sections,
+        skills,
+        dates,
+        experience,
+        projects,
+        overallScore
+    });
 
-        (
+    // Gemini AI Analysis
+    const raw = await analyzeATS({
 
-            await analyzeWithGemini(
+        resumeText,
 
-                resumeText,
+        overallScore,
 
-                jobDescription
+        formatting,
 
-            )
+        contact,
 
-        ).trim()
+        sections,
 
-    );
+        skills,
+
+        dates,
+
+        experience,
+
+        projects
+
+    });
+
+    let gemini;
+
+    try {
+
+        const cleaned = raw
+            .replace(/```json/g, "")
+            .replace(/```/g, "")
+            .trim();
+
+        gemini = JSON.parse(cleaned);
+
+    } catch (err) {
+
+        console.error("Gemini Parse Error");
+        console.error(raw);
+
+        throw new Error("Gemini returned invalid JSON.");
+
+    }
 
     return generateReport({
 
@@ -94,23 +124,31 @@ export async function analyzeResumeService(file,jobDescription){
 
         formatting,
 
-        keywords,
+        contact,
+
+        sections,
 
         skills,
 
-        sections,
+        dates,
 
         experience,
 
         projects,
 
-        readability:gemini.readability,
+        strengths: gemini.strengths || [],
 
-        grammar:gemini.grammar,
+        weaknesses: gemini.weaknesses || [],
 
-        gemini,
+        suggestions: gemini.suggestions || [],
 
-        fileName:file.originalname
+        summary: gemini.summary || "",
+
+        readability: gemini.readability || { score: 0 },
+
+        grammar: gemini.grammar || { score: 0 },
+
+        fileName: file.originalname
 
     });
 

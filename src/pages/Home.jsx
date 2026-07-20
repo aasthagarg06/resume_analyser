@@ -1,7 +1,6 @@
 
 import HeroSection from "../components/HeroSection";
 import FeatureSection from "../components/FeatureSection";
-import UploadResume from "../components/UploadResume";
 import ScoreCard from "../components/ScoreCard";
 import SkillsCard from "../components/SkillsCard";
 import SuggestionsCard from "../components/SuggestionsCard";
@@ -19,9 +18,8 @@ function Home() {
 
       <HeroSection />
       <FeatureSection />
-      <HowItWorks/>
-      <UploadResume />
-      <FAQ/>
+      <HowItWorks />
+      <FAQ />
       <ScoreCard />
       <SkillsCard />
       <SuggestionsCard />

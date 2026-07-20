@@ -6,7 +6,7 @@ export function keywordMatcher(resume, jobDescription) {
     "experience", "required", "preferred"
   ]);
 
-  const normalize = (text) =>
+  const normalize = (text = "") =>
     text
       .toLowerCase()
       .replace(/[^\w\s]/g, " ")
@@ -16,6 +16,16 @@ export function keywordMatcher(resume, jobDescription) {
   const resumeWords = new Set(normalize(resume.normalizedText));
 
   const jdWords = normalize(jobDescription);
+
+  if (jdWords.length === 0) {
+    return {
+      score: 100,
+      matched: [],
+      missing: [],
+      totalKeywords: 0,
+      note: "No job description provided."
+    };
+  }
 
   const matched = [];
   const missing = [];
@@ -30,10 +40,7 @@ export function keywordMatcher(resume, jobDescription) {
 
   const uniqueKeywords = [...new Set(jdWords)];
 
-  const score =
-    uniqueKeywords.length === 0
-      ? 0
-      : Math.round((matched.length / uniqueKeywords.length) * 100);
+  const score = Math.round((matched.length / uniqueKeywords.length) * 100);
 
   return {
     score,

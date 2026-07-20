@@ -3,10 +3,13 @@ function AboutSection() {
     <section
       id="about"
       className="
+        min-h-screen
         py-24
         px-6
-        bg-slate-300
-        dark:bg-slate-950
+        bg-linear-to-br
+        from-slate-400
+        via-blue-50
+        to-violet-100
         transition-colors
         duration-300
       "

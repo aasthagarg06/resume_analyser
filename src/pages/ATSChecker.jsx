@@ -2,119 +2,286 @@ import axios from "axios";
 import { extractText } from "../utils/extractText";
 import { validateResume } from "../utils/fileValidation";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  CircularProgressbar,
+  buildStyles,
+} from "react-circular-progressbar";
+// import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import "react-circular-progressbar/dist/styles.css";
 function ATSChecker() {
-    const [jobDescription, setJobDescription] = useState("");
-    const [resume, setResume] = useState(null);
-    const [analysis, setAnalysis] = useState(null);
-    const [resumeText, setResumeText] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [showResults, setShowResults] = useState(false);
+  const [resume, setResume] = useState(null);
+  const [analysis, setAnalysis] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  async function handleResumeUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
-const [error, setError] = useState("");
-async function handleResumeUpload(e) {
-  const file = e.target.files[0];
-
-  if (!file) return;
-
-  setResume(file);
-
-  const validationError = validateResume(file);
-
-  if (validationError) {
-    setError(validationError);
-    return;
-  }
-
-  setLoading(true);
-  setError("");
-
-  try {
-    const text = await extractText(file);
-
-    console.log("Extracted Text:", text);
-
-    setResumeText(text);
-
-  } catch (err) {
-    console.error("Extraction Error:", err);
-
-    setResumeText("Unable to extract text.");
-
-    setError(err.message);
-  } finally {
-    setLoading(false);
-  }
-}
-const handleAnalyze = async () => {
-
-    if (!resume) {
-        setError("Please upload a resume first.");
-        return;
+    const validationError = validateResume(file);
+    if (validationError) {
+      setError(validationError);
+      return;
     }
 
-    if (!jobDescription.trim()) {
-        setError("Please enter a job description.");
-        return;
-    }
-
-    setLoading(true);
+    setResume(file);
     setError("");
 
     try {
+      setLoading(true);
+      await extractText(file); // validates readability
+    } catch (err) {
+      setError(err.message || "Unable to read resume.");
+    } finally {
+      setLoading(false);
+    }
+  }
+  async function handleAnalyze() {
+    if (!resume) {
+      setError("Please upload a resume first.");
+      return;
+    }
 
-        const formData = new FormData();
+    setLoading(true);
 
-        formData.append("resume", resume);
-        formData.append("jobDescription", jobDescription);
+    setError("");
 
-        const response = await axios.post(
-    "http://localhost:5000/api/analyze",
-    formData
-);
+    try {
+      const formData = new FormData();
+      formData.append("resume", resume);
 
-console.log(
-  "Backend Response:",
-  JSON.stringify(response.data, null, 2)
-);
-console.log("Type:", typeof response.data);
+      const response = await axios.post(
+        "http://localhost:5000/api/analyze",
+        formData
+      );
 
-// Save AI response
-setAnalysis(response.data.analysis);
-// Show Results
-setShowResults(true);
+      const data = response.data.analysis;
+      console.log("Backend Response:");
+      console.log(data);
+
+      setAnalysis({
+
+        overallScore: data.overallScore ?? data.scores?.overall ?? 0,
+
+        formatting: data.formatting,
+
+        contact: data.contact,
+
+        sections: data.sections,
+
+        skills: data.skills,
+
+        dates: data.dates,
+
+        experience: data.experience,
+
+        projects: data.projects,
+
+        readability: data.readability,
+
+        grammar: data.grammar,
+
+        summary: data.summary,
+
+        strengths: data.strengths ?? [],
+
+        weaknesses: data.weaknesses ?? [],
+
+        suggestions: data.suggestions ?? []
+
+      });
 
     } catch (err) {
-
-        console.error(err);
-
-        setError(
-            err.response?.data?.message ||
-            "Something went wrong while analyzing the resume."
-        );
-
+      console.error(err);
+      setError(
+        err.response?.data?.message ||
+        "Failed to analyze resume."
+      );
     } finally {
+      setLoading(false);
+    }
+  }
+  const downloadPDF = () => {
 
-        setLoading(false);
+    if (!analysis) return;
+
+    const pdf = new jsPDF();
+
+    let y = 20;
+
+    pdf.setFontSize(22);
+    pdf.text("ATS Resume Report", 20, y);
+
+    y += 15;
+
+    pdf.setFontSize(14);
+
+    pdf.text(`Overall ATS Score: ${analysis.overallScore}%`, 20, y);
+
+    y += 10;
+
+    pdf.text(`Formatting Score: ${analysis.formatting?.score || 0}%`, 20, y);
+
+    y += 10;
+
+    pdf.text(`Sections Score: ${analysis.sections?.score || 0}%`, 20, y);
+
+    y += 10;
+
+    pdf.text(`Experience Score: ${analysis.experience?.score || 0}%`, 20, y);
+
+    y += 20;
+
+    // AI Summary
+    if (analysis.summary) {
+
+      pdf.setFontSize(18);
+      pdf.text("AI Summary", 20, y);
+
+      y += 10;
+
+      pdf.setFontSize(12);
+
+      const summary = pdf.splitTextToSize(analysis.summary, 170);
+
+      pdf.text(summary, 20, y);
+
+      y += summary.length * 7 + 10;
 
     }
-};
+
+    // Skills
+    pdf.setFontSize(18);
+    pdf.text("Skills Found", 20, y);
+
+    y += 10;
+
+    pdf.setFontSize(12);
+
+    analysis.skills?.matchedSkills?.forEach((skill) => {
+
+      const lines = pdf.splitTextToSize(`• ${skill}`, 165);
+
+      if (y + lines.length * 7 > 280) {
+        pdf.addPage();
+        y = 20;
+      }
+
+      pdf.text(lines, 25, y);
+
+      y += lines.length * 7;
+
+    });
+
+    y += 10;
+
+    // Strengths
+    pdf.setFontSize(18);
+    pdf.text("Strengths", 20, y);
+
+    y += 10;
+
+    pdf.setFontSize(12);
+
+    analysis.strengths?.forEach((item) => {
+
+      const lines = pdf.splitTextToSize(`• ${item}`, 165);
+
+      if (y + lines.length * 7 > 280) {
+        pdf.addPage();
+        y = 20;
+      }
+
+      pdf.text(lines, 25, y);
+
+      y += lines.length * 7;
+
+    });
+
+    y += 10;
+
+    // Weaknesses
+    pdf.setFontSize(18);
+    pdf.text("Weaknesses", 20, y);
+
+    y += 10;
+
+    pdf.setFontSize(12);
+
+    analysis.weaknesses?.forEach((item) => {
+
+      const lines = pdf.splitTextToSize(`• ${item}`, 165);
+
+      if (y + lines.length * 7 > 280) {
+        pdf.addPage();
+        y = 20;
+      }
+
+      pdf.text(lines, 25, y);
+
+      y += lines.length * 7;
+
+    });
+
+    y += 10;
+
+    // Suggestions
+    pdf.setFontSize(18);
+    pdf.text("Suggestions", 20, y);
+
+    y += 10;
+
+    pdf.setFontSize(12);
+
+    analysis.suggestions?.forEach((item) => {
+
+      const lines = pdf.splitTextToSize(`• ${item}`, 165);
+
+      if (y + lines.length * 7 > 280) {
+        pdf.addPage();
+        y = 20;
+      }
+
+      pdf.text(lines, 25, y);
+
+      y += lines.length * 7;
+
+    });
+
+    y += 15;
+
+    pdf.setFontSize(10);
+
+    pdf.text(
+      `Generated on ${new Date().toLocaleString()}`,
+      20,
+      y
+    );
+
+    pdf.save("ATS_Report.pdf");
+
+  };
   return (
-    <section
-  className="
-    min-h-screen
-    py-16
-    px-8 lg:px-16
-    bg-gradient-to-br
-    from-slate-50
-    via-blue-50
-    to-violet-100
-    dark:from-[#0F172A]
-    dark:via-[#111827]
-    dark:to-[#020617]
-    transition-all
-    duration-300
-  "
->
+    <motion.section
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="
+        min-h-screen
+        py-16
+        px-8 lg:px-16
+        bg-gradient-to-br
+        from-slate-50
+        via-blue-50
+        to-violet-100
+        dark:from-[#0F172A]
+        dark:via-[#111827]
+        dark:to-[#020617]
+        transition-all
+        duration-300
+      "
+    >
 
       <div className="max-w-7xl mx-auto">
 
@@ -135,7 +302,7 @@ setShowResults(true);
 
         {/* Upload Section */}
         <div
-className="
+          className="
 bg-white/90
 dark:bg-slate-900/80
 backdrop-blur-xl
@@ -150,29 +317,13 @@ duration-300
 p-10
 mb-12
 "
->
-
-          <div className="text-center">
-
-            <div className="text-7xl mb-4">
-              📄
-            </div>
-
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
-              Upload Resume
-            </h2>
-
-            <p className="text-slate-500 dark:text-slate-400 mt-3">
-              PDF Format Supported
-            </p>
-
-          </div>
+        >
 
           {!resume ? (
 
-<div
-onClick={() => document.getElementById("resumeInput").click()}
-className="
+            <div
+              onClick={() => document.getElementById("resumeInput").click()}
+              className="
 mt-8
 border-2
 border-dashed
@@ -187,38 +338,38 @@ p-10
 text-center
 transition-all
 "
->
+            >
 
-<div className="text-6xl">
-📄
-</div>
+              <div className="text-6xl">
+                📄
+              </div>
 
-<h3 className="mt-4 text-2xl font-bold dark:text-white">
+              <h3 className="mt-4 text-2xl font-bold dark:text-white">
 
-Drag & Drop Resume
+                Drag & Drop Resume
 
-</h3>
+              </h3>
 
-<p className="mt-2 text-slate-500">
+              <p className="mt-2 text-slate-500">
 
-or Click to Browse
+                or Click to Browse
 
-</p>
+              </p>
 
-<input
-id="resumeInput"
-hidden
-type="file"
-accept=".pdf"
-onChange={handleResumeUpload}
-/>
+              <input
+                id="resumeInput"
+                hidden
+                type="file"
+                accept=".pdf"
+                onChange={handleResumeUpload}
+              />
 
-</div>
+            </div>
 
-) : (
+          ) : (
 
-<div
-className="
+            <div
+              className="
 mt-8
 rounded-3xl
 bg-green-50
@@ -229,38 +380,57 @@ p-10
 text-center
 shadow-lg
 "
->
+            >
 
-<div className="text-6xl">
-✅
-</div>
+              <div className="text-6xl">
+                ✅
+              </div>
 
-<h2 className="mt-4 text-2xl font-bold text-green-700">
+              <h2 className="mt-4 text-2xl font-bold text-green-700">
 
-Resume Uploaded Successfully
+                Resume Uploaded Successfully
 
-</h2>
+              </h2>
+              <div className="mt-5">
 
-<p className="mt-2">
+                <p>
 
-{resume.name}
+                  Pages : 1
 
-</p>
+                </p>
 
-<p className="text-slate-500">
+                <p>
 
-{(resume.size / (1024 * 1024)).toFixed(2)} MB
+                  Words : {analysis?.wordCount}
 
-</p>
+                </p>
 
-<button
+                <p>
 
-onClick={()=>{
-setResume(null);
-setResumeText("");
-}}
+                  Detected Skills : {analysis?.skills?.matchedSkills?.length}
 
-className="
+                </p>
+
+              </div>
+              <p className="mt-2">
+
+                {resume.name}
+
+              </p>
+
+              <p className="text-slate-500">
+
+                {(resume.size / (1024 * 1024)).toFixed(2)} MB
+
+              </p>
+
+              <button
+
+                onClick={() => {
+                  setResume(null);
+                }}
+
+                className="
 mt-5
 px-5
 py-2
@@ -269,66 +439,35 @@ bg-red-500
 text-white
 "
 
->
+              >
 
-Remove Resume
+                Remove Resume
 
-</button>
+              </button>
 
-</div>
+            </div>
 
-)}
+          )}
 
-{loading && (
-  <div className="mt-4 text-center">
-    <p className="text-blue-600 font-semibold">
-      📖 Reading Resume...
-    </p>
-  </div>
-)}
+          {loading && (
+            <div className="mt-4 text-center">
+              <p className="text-blue-600 font-semibold">
+                🤖 Analyzing Resume...
+              </p>
+            </div>
+          )}
 
 
 
-{/* Job Description */}
-
-<div className="mt-8">
-
-  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
-    Job Description
-  </h3>
-
-  <textarea
-  value={jobDescription}
-  onChange={(e) =>
-    setJobDescription(e.target.value)
-  }
-  placeholder="Paste the complete job description here..."
-  rows="12"
-  className="
-    w-full
-    p-5
-    border-2
-    border-slate-200
-dark:border-slate-700
-bg-slate-50
-dark:bg-slate-800
-text-slate-900
-dark:text-white
-placeholder:text-slate-400
-  "
-/>
-
-</div>
-
-{error && (
-  <p className="text-red-600 mt-4 font-medium">
-    {error}
-  </p>
-)}
+          {error && (
+            <p className="text-red-600 mt-4 font-medium">
+              {error}
+            </p>
+          )}
 
           <button
-  onClick={handleAnalyze}
-  className="
+            onClick={handleAnalyze}
+            className="
     mt-6
     w-full
     py-4
@@ -346,75 +485,220 @@ placeholder:text-slate-400
     hover:shadow-blue-500/30
 
   "
->
-  Analyze Resume
-</button>
+          >
+            Analyze Resume
+          </button>
 
         </div>
 
         {/* ATS Score */}
         {analysis && (
+          <div id="report-content">
+            {/* ATS Score */}
+            <div
+              className="
+      bg-white/90
+      dark:bg-slate-900/80
+      backdrop-blur-xl
+      rounded-3xl
+      border
+      border-slate-200
+      dark:border-slate-800
+      shadow-2xl
+      p-10
+      mb-12
+      text-center
+      transition-all"
+            >
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
+                ATS Score
+              </h2>
 
-<div
-className="
-bg-white/90
-dark:bg-slate-900/80
-backdrop-blur-xl
-rounded-3xl
-border
-border-slate-200
-dark:border-slate-800
-shadow-2xl
-p-10
-mb-12
-text-center
-transition-all
-"
->
+              <div className="w-56 h-56 mx-auto">
+                <CircularProgressbar
+                  value={analysis.overallScore || 0}
+                  text={`${analysis.overallScore || 0}%`}
+                  styles={buildStyles({
+                    textSize: "18px",
+                    pathColor: "#2563eb",
+                    textColor: "#f8fafc",
+                    trailColor: "#e5e7eb",
+                  })}
+                />
+              </div>
 
-<h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
+              <p className="text-slate-500 mt-4">
+                AI Generated ATS Score
+              </p>
 
-ATS Score
+              <p className="mt-4 text-xl font-bold text-blue-600">
+                {analysis.overallScore >= 90
+                  ? "⭐⭐⭐⭐⭐ Excellent"
+                  : analysis.overallScore >= 80
+                    ? "⭐⭐⭐⭐ Very Good"
+                    : analysis.overallScore >= 70
+                      ? "⭐⭐⭐ Good"
+                      : analysis.overallScore >= 60
+                        ? "⭐⭐ Average"
+                        : "⭐ Needs Improvement"}
+              </p>
+            </div>
 
-</h2>
+            {/* Score Breakdown */}
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-6 mb-12">
 
-<div
-className="
-text-8xl
-font-extrabold
-bg-linear-to-r
-from-emerald-400
-to-green-600
-bg-clip-text
-text-transparent
-"
->
+              <div className="bg-white rounded-2xl p-6 shadow text-center">
+                <h3>Formatting</h3>
+                <p className="text-3xl font-bold text-blue-600">
+                  {analysis.formatting?.score || 0}%
+                </p>
+                <p className="text-sm mt-3 text-gray-500">
 
-{analysis?.overallScore ?? analysis?.atsScore ?? 0}%
+                  {analysis.formatting?.feedback}
 
-</div>
+                </p>
+              </div>
 
-<p className="text-slate-500 mt-4">
+              <div className="bg-white rounded-2xl p-6 shadow text-center">
+                <h3>Contact</h3>
+                <p className="text-3xl font-bold text-green-600">
+                  {analysis.contact?.score || 0}%
+                </p>
+              </div>
 
-AI Generated ATS Score
+              <div className="bg-white rounded-2xl p-6 shadow text-center">
+                <h3>Sections</h3>
+                <p className="text-3xl font-bold text-orange-600">
+                  {analysis.sections?.score || 0}%
+                </p>
+              </div>
 
-</p>
+              <div className="bg-white rounded-2xl p-6 shadow text-center">
+                <h3>Skills</h3>
+                <p className="text-3xl font-bold text-indigo-600">
+                  {analysis.skills?.score || 0}%
+                </p>
+              </div>
 
-</div>
+              <div className="bg-white rounded-2xl p-6 shadow text-center">
+                <h3>Dates</h3>
+                <p className="text-3xl font-bold text-red-600">
+                  {analysis.dates?.score || 0}%
+                </p>
+              </div>
 
-)}
+              <div className="bg-white rounded-2xl p-6 shadow text-center">
+                <h3>Experience</h3>
+                <p className="text-3xl font-bold text-purple-600">
+                  {analysis.experience?.score || 0}%
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        )}
+        {analysis && (
+
+          <div className="bg-white/90
+    dark:bg-slate-900/80
+    backdrop-blur-xl
+    rounded-3xl
+    border
+    border-slate-200
+    dark:border-slate-800
+    shadow-xl
+    p-8
+    mb-12">
+
+            <h2 className="text-3xl font-bold text-white mb-8">
+
+              Contact Analysis
+
+            </h2>
+
+            <div className="grid md:grid-cols-5 gap-6">
+
+              <div>
+                <h3 className="text-white">Email</h3>
+                <p className="text-white">{analysis.contact?.email ? "✅ Found" : "❌ Missing"}</p>
+              </div>
+
+              <div>
+                <h3 className="text-white">Phone</h3>
+                <p className="text-white">{analysis.contact?.phone ? "✅ Found" : "❌ Missing"}</p>
+              </div>
+
+              <div>
+                <h3 className="text-white">LinkedIn</h3>
+                <p className="text-white">{analysis.contact?.linkedin ? "✅ Found" : "❌ Missing"}</p>
+              </div>
+
+              <div>
+                <h3 className="text-white">GitHub</h3>
+                <p className="text-white">{analysis.contact?.github ? "✅ Found" : "❌ Missing"}</p>
+              </div>
 
 
-{/* Skills */}
+            </div>
 
-{analysis && (
+          </div>
 
-<div className="grid md:grid-cols-2 gap-8 mb-12">
+        )}
 
-  {/* Matched Skills */}
+        {analysis?.sections?.missing?.length > 0 && (
 
-  <div
-className="
+          <div className="bg-white/90
+    dark:bg-slate-900/80
+    backdrop-blur-xl
+    rounded-3xl
+    border
+    border-slate-200
+    dark:border-slate-800
+    shadow-xl
+    p-8
+    mb-12">
+
+            <h2 className="text-3xl font-bold text-white mb-6">
+
+              Missing Sections
+
+            </h2>
+
+            <div className="flex flex-wrap gap-3">
+
+              {analysis.sections.missing.map((item, index) => (
+
+                <span
+
+                  key={index}
+
+                  className="px-4 py-2 rounded-full bg-red-100 text-red-700"
+
+                >
+
+                  {item}
+
+                </span>
+
+              ))}
+
+            </div>
+
+          </div>
+
+        )}
+        {/* Skills */}
+
+        {analysis && (
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+
+            {/* Matched Skills */}
+
+            <div
+              className="
+md:col-span-2
 bg-white/90
 dark:bg-slate-900/80
 backdrop-blur-xl
@@ -428,19 +712,19 @@ transition-all
 hover:-translate-y-1
 hover:shadow-2xl
 "
->
+            >
 
-    <h3 className="text-2xl text-slate-900 dark:text-white font-bold mb-5">
-      ✅ Skills Found
-    </h3>
+              <h3 className="text-2xl text-slate-900 dark:text-white font-bold mb-5">
+                ✅ Skills Found
+              </h3>
 
-    <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3">
 
-      {analysis.skills?.matchedSkills?.map((skill, index) => (
+                {analysis.skills?.matchedSkills?.map((skill, index) => (
 
-        <span
-          key={index}
-          className="
+                  <span
+                    key={index}
+                    className="
 px-4
 py-2
 rounded-full
@@ -453,73 +737,22 @@ border-emerald-300
 dark:border-emerald-600
 font-medium
 ">
-          {skill}
-        </span>
+                    {skill}
+                  </span>
 
-      ))}
+                ))}
 
-    </div>
+              </div>
 
-  </div>
+            </div>
 
-  {/* Missing Skills */}
+          </div>
 
-  <div
-className="
-bg-white/90
-dark:bg-slate-900/80
-backdrop-blur-xl
-rounded-3xl
-border
-border-slate-200
-dark:border-slate-800
-shadow-xl
-p-8
-transition-all
-hover:-translate-y-1
-hover:shadow-2xl
-"
->
-
-    <h3 className="text-2xl text-slate-900 dark:text-white font-bold mb-5">
-      ❌ Missing Skills
-    </h3>
-
-    <div className="flex flex-wrap gap-3">
-
-      {analysis.skills?.missingSkills?.map((skill, index) => (
-
-        <span
-          key={index}
-          className="
-px-4
-py-2
-rounded-full
-bg-red-100
-text-red-700
-dark:bg-red-500/20
-dark:text-red-300
-border
-border-red-300
-dark:border-red-600
-font-medium
-">
-          {skill}
-        </span>
-
-      ))}
-
-    </div>
-
-  </div>
-
-</div>
-
-)}
+        )}
 
         {/* Resume Strength */}
         <div
-className="
+          className="
 bg-white/90
 dark:bg-slate-900/80
 backdrop-blur-xl
@@ -531,7 +764,7 @@ shadow-xl
 p-10
 mb-12
 "
->
+        >
 
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">
             Resume Strength Analysis
@@ -541,9 +774,9 @@ mb-12
 
             {analysis?.strengths?.map((item, index) => (
 
-<div
-key={index}
-className="
+              <div
+                key={index}
+                className="
 bg-emerald-50
 dark:bg-emerald-900/20
 border
@@ -555,21 +788,21 @@ transition
 hover:scale-105
 ">
 
-{item}
+                {item}
 
-</div>
+              </div>
 
-))}
+            ))}
 
           </div>
 
         </div>
 
 
-{analysis && (
+        {analysis && (
 
-<div
-className="
+          <div
+            className="
 bg-white/90
 dark:bg-slate-900/80
 backdrop-blur-xl
@@ -581,21 +814,21 @@ shadow-xl
 p-10
 mb-12
 "
->
+          >
 
-<h2 className="text-3xl text-slate-900 dark:text-white font-bold mb-8">
+            <h2 className="text-3xl text-slate-900 dark:text-white font-bold mb-8">
 
-⚠ Weaknesses
+              ⚠ Weaknesses
 
-</h2>
+            </h2>
 
-<div className="space-y-4">
+            <div className="space-y-4">
 
-{analysis?.weaknesses?.map((item,index)=>(
+              {analysis?.weaknesses?.map((item, index) => (
 
-<div
-key={index}
-className="
+                <div
+                  key={index}
+                  className="
 bg-red-50
 dark:bg-red-900/20
 border
@@ -607,24 +840,24 @@ p-5
 transition
 hover:scale-[1.02]
 "
->
+                >
 
-{item}
+                  {item}
 
-</div>
+                </div>
 
-))}
+              ))}
 
-</div>
+            </div>
 
-</div>
+          </div>
 
-)}
+        )}
 
 
         {/* Suggestions */}
         <div
-className="
+          className="
 bg-white/90
 dark:bg-slate-900/80
 backdrop-blur-xl
@@ -636,9 +869,38 @@ shadow-xl
 p-10
 mb-12
 "
->
+        >
 
+          {analysis?.summary && (
 
+            <div
+              className="
+
+bg-indigo-50
+
+rounded-2xl
+
+p-6
+
+mb-8
+
+">
+
+              <h3 className="font-bold text-2xl">
+
+                AI Summary
+
+              </h3>
+
+              <p>
+
+                {analysis.summary}
+
+              </p>
+
+            </div>
+
+          )}
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">
             ✨ AI Suggestions
           </h2>
@@ -647,9 +909,9 @@ mb-12
 
             {analysis?.suggestions?.map((item, index) => (
 
-<div
-key={index}
-className="
+              <div
+                key={index}
+                className="
 group
 bg-blue-50
 dark:bg-slate-800/70
@@ -665,13 +927,13 @@ hover:-translate-y-1
 hover:border-blue-500
 hover:shadow-lg
 "
->
+              >
 
-{item}
+                {item}
 
-</div>
+              </div>
 
-))}
+            ))}
 
           </div>
 
@@ -695,31 +957,17 @@ hover:shadow-lg
             shadow-lg
             hover:shadow-blue-500/30
             "
-          >
+            onClick={downloadPDF}>
             Download Report
           </button>
 
-          <button
-            className="
-              flex-1
-              py-4
-              rounded-2xl
-              border-2
-              border-blue-600
-dark:border-blue-400
-text-blue-600
-dark:text-blue-400
-              font-bold
-            "
-          >
-            Improve Resume
-          </button>
+
 
         </div>
 
       </div>
 
-    </section>
+    </motion.section >
   );
 }
 

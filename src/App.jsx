@@ -14,53 +14,58 @@ import ATSChecker from "./pages/ATSChecker";
 import ATSAnalysis from "./pages/ATSAnalysis";
 import SkillDetection from "./pages/SkillDetection";
 import JDMatching from "./pages/JDMatching";
+import Dashboard from "./pages/Dashboard";
+import Contact from "./pages/Contact";
 import Login from "./components/LoginModal";
 import signup from "./components/SignupModal";
 function App() {
   return (
     <BrowserRouter>
-    <ScrollToTop />
-  <div className="min-h-screen bg-linear-to-br from-slate-300 via-blue-50 to-violet-50">
-    <Navbar />
+      <ScrollToTop />
+      <div className="min-h-screen bg-linear-to-br from-slate-300 via-blue-50 to-violet-50">
+        <Navbar />
 
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<AboutSection />} />
-      <Route
-  path="/ats-checker"
-  element={
-    <>
-      <SignedIn>
-        <ATSChecker />
-      </SignedIn>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutSection />} />
+          <Route
+            path="/ats-checker"
+            element={
+              <>
+                <SignedIn>
+                  <ATSChecker />
+                </SignedIn>
 
-      <SignedOut>
-        <RedirectToSignIn />
-      </SignedOut>
-    </>
-  }
-/>
-    <Route
-  path="/ats-analysis"
-  element={<ATSAnalysis />}
-/>
+                <SignedOut>
+                  <RedirectToSignIn />
+                </SignedOut>
+              </>
+            }
+          />
+          <Route
+            path="/ats-analysis"
+            element={<ATSAnalysis />}
+          />
 
-<Route
-  path="/skill-detection"
-  element={<SkillDetection />}
-/>
+          <Route
+            path="/skill-detection"
+            element={<SkillDetection />}
+          />
 
-<Route
-  path="/jd-matching"
-  element={<JDMatching />}
-/>
+          <Route
+            path="/jd-matching"
+            element={<JDMatching />}
+          />
 
-    </Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/contact" element={<Contact />} />
 
-    <Footer />
-    
-  </div>
-</BrowserRouter>
+        </Routes>
+
+        <Footer />
+
+      </div>
+    </BrowserRouter>
   );
 }
 

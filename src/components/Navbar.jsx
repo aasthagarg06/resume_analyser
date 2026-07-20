@@ -11,11 +11,11 @@ import {
 
 function Navbar() {
   const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-};
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <nav
@@ -67,41 +67,38 @@ function Navbar() {
 
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
               <Link
-  to="/"
-  onClick={scrollToTop}
->
-  Home
-</Link>
+                to="/"
+                onClick={scrollToTop}
+              >
+                Home
+              </Link>
             </li>
 
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
               <Link
-  to="/ats-checker"
-  onClick={scrollToTop}
->
-  ATS Checker
-</Link>
-            </li>
-
-            <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
-              JD Match
-            </li>
-
-            <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
-              Blog
-            </li>
-
-            <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
-              Job Alerts
+                to="/ats-checker"
+                onClick={scrollToTop}
+              >
+                ATS Checker
+              </Link>
             </li>
 
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
               <Link
-  to="/about"
-  onClick={scrollToTop}
->
-  About
-</Link>
+                to="/jd-matching"
+                onClick={scrollToTop}
+              >
+                JD Match
+              </Link>
+            </li>
+
+            <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
+              <Link
+                to="/about"
+                onClick={scrollToTop}
+              >
+                About
+              </Link>
             </li>
 
           </ul>
