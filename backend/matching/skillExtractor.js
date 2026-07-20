@@ -1,4 +1,4 @@
-import { skillsDatabase } from "../constants/skills.js";
+import { skillsDatabase, skillAliases } from "../constants/skills.js";
 
 function escapeRegex(text) {
     return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -10,63 +10,93 @@ export function skillExtractor(resumeText) {
 
     const matchedSkills = new Set();
 
+    // Match canonical skills first
     skillsDatabase.forEach(skill => {
 
-        const escapedSkill = escapeRegex(skill.toLowerCase());
+        const escaped = escapeRegex(skill.toLowerCase());
 
-        // Multi-word skills
-        if (escapedSkill.includes(" ")) {
+        let regex;
 
-            const regex = new RegExp(escapedSkill, "i");
-
-            if (regex.test(text)) {
-
-                matchedSkills.add(skill);
-
-            }
-
-        }
-
-        // Skills containing special characters like C++, C#, Node.js
-        else if (
-            escapedSkill.includes("+") ||
-            escapedSkill.includes("#") ||
-            escapedSkill.includes(".")
+        if (
+            escaped.includes(" ") ||
+            escaped.includes("+") ||
+            escaped.includes("#") ||
+            escaped.includes(".")
         ) {
-
-            const regex = new RegExp(escapedSkill, "i");
-
-            if (regex.test(text)) {
-
-                matchedSkills.add(skill);
-
-            }
-
+            regex = new RegExp(escaped, "i");
+        } else {
+            regex = new RegExp(`\\b${escaped}\\b`, "i");
         }
 
-        // Normal words
-        else {
-
-            const regex = new RegExp(`\\b${escapedSkill}\\b`, "i");
-
-            if (regex.test(text)) {
-
-                matchedSkills.add(skill);
-
-            }
-
+        if (regex.test(text)) {
+            matchedSkills.add(skill);
         }
 
     });
 
-    const uniqueSkills = [...matchedSkills];
+    // Match aliases and map them to the canonical skill
+    Object.entries(skillAliases).forEach(([canonical, aliases]) => {
 
-    uniqueSkills.sort((a, b) => a.localeCompare(b));
+        aliases.forEach(alias => {
 
-    const score = Math.min(
-        Math.round((uniqueSkills.length / 25) * 100),
-        100
+            const escaped = escapeRegex(alias.toLowerCase());
+
+            let regex;
+
+            if (
+                escaped.includes(" ") ||
+                escaped.includes("+") ||
+                escaped.includes("#") ||
+                escaped.includes(".")
+            ) {
+                regex = new RegExp(escaped, "i");
+            } else {
+                regex = new RegExp(`\\b${escaped}\\b`, "i");
+            }
+
+            if (regex.test(text)) {
+                matchedSkills.add(canonical);
+            }
+
+        });
+
+    });
+
+    const uniqueSkills = [...matchedSkills].sort((a, b) =>
+        a.localeCompare(b)
     );
+
+    const total = uniqueSkills.length;
+
+    // -----------------------------
+    // More realistic scoring
+    // -----------------------------
+
+    let score = 0;
+
+    if (total <= 4)
+        score = 20;
+
+    else if (total <= 8)
+        score = 40;
+
+    else if (total <= 12)
+        score = 55;
+
+    else if (total <= 16)
+        score = 70;
+
+    else if (total <= 20)
+        score = 80;
+
+    else if (total <= 25)
+        score = 88;
+
+    else if (total <= 30)
+        score = 92;
+
+    else
+        score = 95;
 
     return {
 
@@ -74,7 +104,7 @@ export function skillExtractor(resumeText) {
 
         matchedSkills: uniqueSkills,
 
-        totalSkills: uniqueSkills.length
+        totalSkills: total
 
     };
 

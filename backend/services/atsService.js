@@ -8,7 +8,9 @@ import { dateAnalyzer } from "../analysis/dateAnalyzer.js";
 import { calculateScore } from "../analysis/scoreCalculator.js";
 
 import { skillExtractor } from "../matching/skillExtractor.js";
+import { experienceAnalyzer } from "../analysis/experienceAnalyzer.js";
 
+import { projectAnalyzer } from "../analysis/projectAnalyzer.js";
 import { analyzeATS } from "./geminiService.js";
 
 import { generateReport } from "../reporting/reportGenerator.js";
@@ -36,13 +38,9 @@ export async function analyzeResumeService(file) {
 
     const dates = dateAnalyzer(resumeText);
 
-    const experience = {
-        score: resume.sections?.experience ? 100 : 50
-    };
+    const experience = experienceAnalyzer(resumeText);
 
-    const projects = {
-        score: resume.sections?.projects ? 100 : 50
-    };
+    const projects = projectAnalyzer(resumeText);
 
     // Calculate ATS Score
     const overallScore = calculateScore({

@@ -1,5 +1,16 @@
+export const skillAliases = {
+    "React": ["React", "React.js"],
+    "Node.js": ["Node", "Node.js"],
+    "Express": ["Express", "Express.js"],
+    "Vue": ["Vue", "Vue.js"],
+    "DBMS": ["DBMS", "Database Management System"],
+    "OOPS": ["OOPS", "Object Oriented Programming", "Object-Oriented Programming"],
+    "AWS": ["AWS", "Amazon Web Services"],
+    "Artificial Intelligence": ["Artificial Intelligence", "AI"],
+    "Natural Language Processing": ["Natural Language Processing", "NLP"],
+    "REST API": ["REST API", "RESTful API"]
+};
 export const skillsDatabase = [
-
     // Programming Languages
     "C",
     "C++",
@@ -8,46 +19,44 @@ export const skillsDatabase = [
     "Python",
     "JavaScript",
     "TypeScript",
-    "PHP",
-    "R",
     "Go",
     "Rust",
     "Kotlin",
     "Swift",
-    "Dart",
+    "PHP",
+    "Ruby",
+    "R",
     "Scala",
     "Perl",
-    "Ruby",
-
+    "MATLAB",
+    "Dart",
+    "SQL",
     // Frontend
     "HTML",
-    "HTML5",
     "CSS",
-    "CSS3",
+    "SASS",
     "Bootstrap",
     "Tailwind CSS",
     "Material UI",
+    "Chakra UI",
     "React",
-    "React.js",
     "Next.js",
     "Vue",
-    "Vue.js",
+    "Nuxt.js",
     "Angular",
+    "Svelte",
     "Redux",
-    "Vite",
-
     // Backend
     "Node.js",
     "Express",
-    "Express.js",
     "Spring Boot",
     "Django",
     "Flask",
+    "FastAPI",
     "Laravel",
     "ASP.NET",
-
+    "NestJS",
     // Databases
-    "SQL",
     "MySQL",
     "PostgreSQL",
     "MongoDB",
@@ -55,109 +64,106 @@ export const skillsDatabase = [
     "Oracle",
     "SQLite",
     "Redis",
-
+    "MariaDB",
+    "Cassandra",
+    "DynamoDB",
     // Cloud
     "AWS",
     "Azure",
     "Google Cloud",
-    "Google Cloud Platform",
-    "Cloud Computing",
-    "Cloud Technologies",
-
+    "Docker",
+    "Kubernetes",
+    "Terraform",
+    "Jenkins",
+    "CI/CD",
+    "Netlify",
+    "Vercel",
+    "Heroku",
+    // Version Control
+    "Git",
+    "GitHub",
+    "GitLab",
+    "Bitbucket",
     // AI / ML
     "Machine Learning",
     "Deep Learning",
     "Artificial Intelligence",
     "Generative AI",
     "Prompt Engineering",
-    "NLP",
+    "LLM",
     "TensorFlow",
     "PyTorch",
+    "Scikit-learn",
+    "Keras",
+    "LangChain",
     "OpenCV",
-    "Scikit Learn",
-
-    // DevOps
-    "Docker",
-    "Kubernetes",
-    "Jenkins",
-    "CI/CD",
-    "GitHub Actions",
-
-    // Version Control
-    "Git",
-    "GitHub",
-    "GitLab",
-    "Bitbucket",
-
-    // APIs
-    "REST API",
-    "RESTful API",
-    "GraphQL",
-    "Axios",
-    "Postman",
-
-    // Tools
-    "VS Code",
-    "Visual Studio",
-    "Android Studio",
-    "IntelliJ",
-    "Eclipse",
-    "Figma",
-    "Canva",
-
+    "Natural Language Processing",
+    "Computer Vision",
     // Data Science
-    "Pandas",
     "NumPy",
+    "Pandas",
     "Matplotlib",
+    "Seaborn",
     "Power BI",
-    "Excel",
-
-    // CS Subjects
-    "Data Structures",
-    "Algorithms",
-    "Data Structure & Algorithms",
-    "DBMS",
-    "Operating System",
-    "Computer Networks",
-    "OOPS",
-    "Software Engineering",
-    "Computer Architecture",
-
-    // Security
-    "JWT",
-    "OAuth",
-    "Authentication",
-
-    // Firebase
-    "Firestore",
-    "Firebase Authentication",
-    "Firebase Storage",
-
-    // Misc
-    "Mongoose",
-    "Prisma",
-    "Socket.io",
-    "Linux",
-    "Unix",
-    "Windows",
-    "Bash",
-    "Shell Scripting",
-
-    // Research
-    "Mendeley",
-    "Overleaf",
-    "LaTeX",
-
-    // APIs
-    "Google Gemini API",
-    "OpenAI API",
-    "Claude API",
-    "Hugging Face",
-
+    "Tableau",
+    // Mobile
+    "Android",
+    "Flutter",
+    "React Native",
     // Testing
+    "JUnit",
     "Jest",
     "Mocha",
     "Cypress",
-    "Selenium"
-
+    "Selenium",
+    "Postman",
+    "Swagger",
+    // Operating Systems
+    "Linux",
+    "Windows",
+    "Unix",
+    // Core CS
+    "Data Structures",
+    "Algorithms",
+    "DBMS",
+    "OOPS",
+    "Operating Systems",
+    "Computer Networks",
+    "Software Engineering",
+    "Cloud Computing",
+    "Compiler Design",
+    "Computer Architecture",
+    // Security
+    "Cyber Security",
+    "JWT",
+    "OAuth",
+    // APIs
+    "REST API",
+    "GraphQL",
+    "Axios",
+    "JSON",
+    "XML",
+    // Tools
+    "VS Code",
+    "Visual Studio",
+    "IntelliJ IDEA",
+    "PyCharm",
+    "Eclipse",
+    "Figma",
+    "Canva",
+    "Jupyter Notebook",
+    // Soft Skills
+    "Leadership",
+    "Teamwork",
+    "Problem Solving",
+    "Communication",
+    "Critical Thinking",
+    "Time Management",
+    "Adaptability",
+    // Software Concepts
+    "Agile",
+    "Scrum",
+    "Microservices",
+    "MVC",
+    "Design Patterns"
 ];

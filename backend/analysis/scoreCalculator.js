@@ -26,20 +26,21 @@ export function calculateScore({
 
   const score =
 
-    formatting.score * 0.20 +
+    formatting.score * 0.10 +
 
-    contact.score * 0.10 +
+    contact.score * 0.05 +
 
-    sections.score * 0.15 +
+    sections.score * 0.08 +
 
-    skills.score * 0.20 +
+    skills.score * 0.30 +
 
-    dates.score * 0.10 +
+    dates.score * 0.02 +
 
-    experience.score * 0.10 +
+    experience.score * 0.20 +
 
-    projects.score * 0.15;
+    projects.score * 0.25;
 
-  return Math.min(100, Math.max(0, Math.round(score)));
+  return Math.round(
+    Math.max(0, Math.min(score, 100)))
 
 }
