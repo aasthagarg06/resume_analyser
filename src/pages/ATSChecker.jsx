@@ -1,8 +1,13 @@
 import axios from "axios";
 import { extractText } from "../utils/extractText";
 import { validateResume } from "../utils/fileValidation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import {
+  saveResume,
+  getRecentResumes
+} from "../utils/localStorage";
+import RecentResumes from "../components/RecentResumes";
 import {
   CircularProgressbar,
   buildStyles,
@@ -13,8 +18,14 @@ import "react-circular-progressbar/dist/styles.css";
 function ATSChecker() {
   const [resume, setResume] = useState(null);
   const [analysis, setAnalysis] = useState(null);
+  const [recentResumes, setRecentResumes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  useEffect(() => {
+
+    setRecentResumes(getRecentResumes());
+
+  }, []);
   async function handleResumeUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
@@ -37,6 +48,42 @@ function ATSChecker() {
       setLoading(false);
     }
   }
+  async function fileToBase64(file) {
+
+    return new Promise((resolve, reject) => {
+
+      const reader = new FileReader();
+
+      reader.onload = () => resolve(reader.result);
+
+      reader.onerror = reject;
+
+      reader.readAsDataURL(file);
+
+    });
+
+  }
+  function handleOpenResume(savedResume) {
+
+    setAnalysis(savedResume.analysis);
+
+    setResume({
+      name: savedResume.name,
+      size: 0
+    });
+
+    // Smoothly scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+  function refreshRecentResumes() {
+
+    setRecentResumes(getRecentResumes());
+
+  }
   async function handleAnalyze() {
     if (!resume) {
       setError("Please upload a resume first.");
@@ -57,6 +104,24 @@ function ATSChecker() {
       );
 
       const data = response.data.analysis;
+      const pdfBase64 = await fileToBase64(resume);
+
+      saveResume({
+
+        id: crypto.randomUUID(),
+
+        name: resume.name,
+
+        uploadedAt: new Date().toLocaleString(),
+
+        atsScore: data.overallScore,
+
+        analysis: data,
+
+        pdf: pdfBase64
+
+      });
+      setRecentResumes(getRecentResumes());
       console.log("Backend Response:");
       console.log(data);
 
@@ -960,11 +1025,13 @@ hover:shadow-lg
             onClick={downloadPDF}>
             Download Report
           </button>
-
-
-
         </div>
-
+        {/* Recently Viewed */}
+        <RecentResumes
+          resumes={recentResumes}
+          onOpen={handleOpenResume}
+          onDelete={refreshRecentResumes}
+        />
       </div>
 
     </motion.section >
