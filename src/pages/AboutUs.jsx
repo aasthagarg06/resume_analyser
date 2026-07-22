@@ -4,14 +4,17 @@ function AboutSection() {
       id="about"
       className="
         min-h-screen
-        py-24
-        px-6
-        bg-linear-to-br
-        from-slate-400
-        via-blue-50
-        to-violet-100
-        transition-colors
-        duration-300
+  py-24
+  px-6
+  bg-gradient-to-br
+  from-slate-300
+  via-blue-50
+  to-violet-100
+  dark:from-slate-950
+  dark:via-slate-900
+  dark:to-slate-950
+  transition-colors
+  duration-300
       "
     >
       <div className="max-w-7xl mx-auto">
@@ -48,6 +51,10 @@ function AboutSection() {
               hover:shadow-xl
               transition-all
               duration-300
+              hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
             "
           >
             <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
@@ -74,6 +81,10 @@ function AboutSection() {
               hover:shadow-xl
               transition-all
               duration-300
+              hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
             "
           >
             <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
@@ -111,6 +122,10 @@ function AboutSection() {
                 shadow-md
                 transition-all
                 duration-300
+                hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
               "
             >
               <h4 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">
@@ -134,6 +149,10 @@ function AboutSection() {
                 shadow-md
                 transition-all
                 duration-300
+                hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
               "
             >
               <h4 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">
@@ -157,6 +176,10 @@ function AboutSection() {
                 shadow-md
                 transition-all
                 duration-300
+                hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
               "
             >
               <h4 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">
@@ -195,6 +218,10 @@ function AboutSection() {
                 dark:text-white
                 transition-all
                 duration-300
+                hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
               "
             >
               ATS Analysis
@@ -214,6 +241,10 @@ function AboutSection() {
                 dark:text-white
                 transition-all
                 duration-300
+                hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
               "
             >
               Skill Detection
@@ -233,6 +264,10 @@ function AboutSection() {
                 dark:text-white
                 transition-all
                 duration-300
+                hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
               "
             >
               JD Matching
@@ -252,6 +287,10 @@ function AboutSection() {
                 dark:text-white
                 transition-all
                 duration-300
+                hover:scale-105
+  hover:shadow-2xl
+  hover:border-blue-500
+  cursor-pointer
               "
             >
               AI Suggestions
@@ -264,7 +303,7 @@ function AboutSection() {
         {/* Stats */}
         <div className="grid md:grid-cols-3 gap-8">
 
-          <div className="bg-linear-to-r from-blue-600 to-violet-600 text-white p-10 rounded-3xl text-center shadow-xl">
+          <div className="bg-gradient-to-r from-blue-600 to-violet-600 text-white p-10 rounded-3xl text-center shadow-xl">
             <h4 className="text-5xl font-bold">
               1000+
             </h4>
@@ -274,7 +313,7 @@ function AboutSection() {
             </p>
           </div>
 
-          <div className="bg-linear-to-r from-blue-600 to-violet-600 text-white p-10 rounded-3xl text-center shadow-xl">
+          <div className="bg-gradient-to-r from-blue-600 to-violet-600 text-white p-10 rounded-3xl text-center shadow-xl">
             <h4 className="text-5xl font-bold">
               95%
             </h4>
@@ -284,7 +323,7 @@ function AboutSection() {
             </p>
           </div>
 
-          <div className="bg-linear-to-r from-blue-600 to-violet-600 text-white p-10 rounded-3xl text-center shadow-xl">
+          <div className="bg-gradient-to-r from-blue-600 to-violet-600 text-white p-10 rounded-3xl text-center shadow-xl">
             <h4 className="text-5xl font-bold">
               24/7
             </h4>

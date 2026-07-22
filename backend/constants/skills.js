@@ -1,14 +1,107 @@
+
 export const skillAliases = {
+
     "React": ["React", "React.js"],
+
     "Node.js": ["Node", "Node.js"],
+
     "Express": ["Express", "Express.js"],
+
     "Vue": ["Vue", "Vue.js"],
-    "DBMS": ["DBMS", "Database Management System"],
-    "OOPS": ["OOPS", "Object Oriented Programming", "Object-Oriented Programming"],
-    "AWS": ["AWS", "Amazon Web Services"],
-    "Artificial Intelligence": ["Artificial Intelligence", "AI"],
-    "Natural Language Processing": ["Natural Language Processing", "NLP"],
-    "REST API": ["REST API", "RESTful API"]
+
+    "HTML": ["HTML", "HTML5"],
+
+    "CSS": ["CSS", "CSS3"],
+
+    "JavaScript": ["JavaScript", "JS"],
+
+    "TypeScript": ["TypeScript", "TS"],
+
+    "DBMS": [
+        "DBMS",
+        "Database Management System"
+    ],
+
+    "OOPS": [
+        "OOPS",
+        "Object Oriented Programming",
+        "Object-Oriented Programming"
+    ],
+
+    "AWS": [
+        "AWS",
+        "Amazon Web Services"
+    ],
+
+    "Artificial Intelligence": [
+        "Artificial Intelligence",
+        "AI"
+    ],
+
+    "Natural Language Processing": [
+        "Natural Language Processing",
+        "NLP"
+    ],
+
+    "REST API": [
+        "REST API",
+        "RESTful API",
+        "API",
+        "APIs",
+        "Gemini API",
+        "OpenAI API",
+        "Google API"
+    ],
+
+    "Material UI": [
+        "Material UI",
+        "Material-UI",
+        "MUI"
+    ],
+
+    "Tailwind CSS": [
+        "Tailwind CSS",
+        "Tailwind",
+        "TailwindCSS"
+    ],
+    "Problem Solving": [
+        "Problem Solving",
+        "Problem-Solving",
+        "Problem Solving Skills",
+        "Problem Solver"
+    ],
+    "Communication": [
+        "Communication",
+        "Communication Skills"
+    ],
+
+    "Leadership": [
+        "Leadership",
+        "Leadership Skills"
+    ],
+
+    "Teamwork": [
+        "Teamwork",
+        "Team Work",
+        "Collaborative"
+    ],
+
+    "Critical Thinking": [
+        "Critical Thinking",
+        "Critical-Thinking"
+    ],
+
+    "Time Management": [
+        "Time Management",
+        "Time-Management"
+    ],
+
+    "Problem Solving": [
+        "Problem Solving",
+        "Problem-Solving",
+        "Problem Solver",
+        "Problem Solving Skills"
+    ]
 };
 export const skillsDatabase = [
     // Programming Languages
