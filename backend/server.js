@@ -5,7 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import analyzeRoutes from "./routes/analyzeRoutes.js";
-
+import jdRoutes from "./routes/jdRoutes.js";
 dotenv.config();
 
 const app = express();
@@ -30,6 +30,7 @@ app.use("/api", (req, res, next) => {
 });
 
 app.use("/api", analyzeRoutes);
+app.use("/api", jdRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

@@ -1,4 +1,4 @@
-import { skillsDatabase, skillAliases } from "../constants/skills.js";
+import { skillsDatabase } from "../constants/skills.js";
 
 function escapeRegex(text) {
     return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -10,55 +10,42 @@ export function skillExtractor(resumeText) {
 
     const matchedSkills = new Set();
 
-    // Match canonical skills first
     skillsDatabase.forEach(skill => {
 
-        const escaped = escapeRegex(skill.toLowerCase());
+        const escapedSkill = escapeRegex(skill.toLowerCase());
 
         let regex;
 
-        if (
-            escaped.includes(" ") ||
-            escaped.includes("+") ||
-            escaped.includes("#") ||
-            escaped.includes(".")
+        // Multi-word skills
+        if (escapedSkill.includes(" ")) {
+
+            regex = new RegExp(escapedSkill, "i");
+
+        }
+
+        // Skills with special characters
+        else if (
+            escapedSkill.includes("+") ||
+            escapedSkill.includes("#") ||
+            escapedSkill.includes(".")
         ) {
-            regex = new RegExp(escaped, "i");
-        } else {
-            regex = new RegExp(`\\b${escaped}\\b`, "i");
+
+            regex = new RegExp(escapedSkill, "i");
+
+        }
+
+        // Normal words
+        else {
+
+            regex = new RegExp(`\\b${escapedSkill}\\b`, "i");
+
         }
 
         if (regex.test(text)) {
+
             matchedSkills.add(skill);
+
         }
-
-    });
-
-    // Match aliases and map them to the canonical skill
-    Object.entries(skillAliases).forEach(([canonical, aliases]) => {
-
-        aliases.forEach(alias => {
-
-            const escaped = escapeRegex(alias.toLowerCase());
-
-            let regex;
-
-            if (
-                escaped.includes(" ") ||
-                escaped.includes("+") ||
-                escaped.includes("#") ||
-                escaped.includes(".")
-            ) {
-                regex = new RegExp(escaped, "i");
-            } else {
-                regex = new RegExp(`\\b${escaped}\\b`, "i");
-            }
-
-            if (regex.test(text)) {
-                matchedSkills.add(canonical);
-            }
-
-        });
 
     });
 
@@ -67,10 +54,6 @@ export function skillExtractor(resumeText) {
     );
 
     const total = uniqueSkills.length;
-
-    // -----------------------------
-    // More realistic scoring
-    // -----------------------------
 
     let score = 0;
 

@@ -1,51 +1,120 @@
-export function keywordMatcher(resume, jobDescription) {
+export function keywordMatcher(resumeText, jobDescription) {
+
   const stopWords = new Set([
-    "the", "and", "for", "with", "you", "your",
-    "this", "that", "from", "have", "will",
-    "are", "our", "job", "role", "candidate",
-    "experience", "required", "preferred"
+
+    "the",
+    "and",
+    "for",
+    "with",
+    "you",
+    "your",
+    "this",
+    "that",
+    "from",
+    "have",
+    "will",
+    "are",
+    "our",
+    "job",
+    "role",
+    "candidate",
+    "experience",
+    "required",
+    "preferred",
+    "years",
+    "year",
+    "work",
+    "using",
+    "ability",
+    "skills"
+
   ]);
 
-  const normalize = (text = "") =>
-    text
+  function normalize(text = "") {
+
+    return text
       .toLowerCase()
+
+      // JS Frameworks
+      .replace(/react\.js/g, "react")
+      .replace(/node\.js/g, "node")
+      .replace(/express\.js/g, "express")
+      .replace(/vue\.js/g, "vue")
+
+      // HTML/CSS
+      .replace(/html5/g, "html")
+      .replace(/css3/g, "css")
+
+      // Languages
+      .replace(/\bjavascript\b/g, "js")
+      .replace(/\btypescript\b/g, "ts")
+
+      // API variations
+      .replace(/restful api/g, "api")
+      .replace(/rest api/g, "api")
+      .replace(/gemini api/g, "api")
+      .replace(/openai api/g, "api")
+      .replace(/google api/g, "api")
+      .replace(/\bapis\b/g, "api")
+
+      // UI libraries
+      .replace(/material-ui/g, "mui")
+      .replace(/material ui/g, "mui")
+      .replace(/tailwindcss/g, "tailwind css")
+
+      // Remove punctuation
       .replace(/[^\w\s]/g, " ")
+
+      // Tokenize
       .split(/\s+/)
-      .filter((word) => word.length > 2 && !stopWords.has(word));
 
-  const resumeWords = new Set(normalize(resume.normalizedText));
+      // Remove empty strings and stop words
+      .filter(
+        word =>
+          word.length > 2 &&
+          !stopWords.has(word)
+      );
 
-  const jdWords = normalize(jobDescription);
-
-  if (jdWords.length === 0) {
-    return {
-      score: 100,
-      matched: [],
-      missing: [],
-      totalKeywords: 0,
-      note: "No job description provided."
-    };
   }
 
-  const matched = [];
-  const missing = [];
+  const resumeWords = new Set(normalize(resumeText));
 
-  jdWords.forEach((word) => {
+  const jdWords = [...new Set(normalize(jobDescription))];
+
+  const matchedKeywords = [];
+  const missingKeywords = [];
+
+  jdWords.forEach(word => {
+
     if (resumeWords.has(word)) {
-      matched.push(word);
+
+      matchedKeywords.push(word);
+
     } else {
-      missing.push(word);
+
+      missingKeywords.push(word);
+
     }
+
   });
 
-  const uniqueKeywords = [...new Set(jdWords)];
-
-  const score = Math.round((matched.length / uniqueKeywords.length) * 100);
+  const score =
+    jdWords.length === 0
+      ? 100
+      : Math.round(
+        (matchedKeywords.length / jdWords.length) * 100
+      );
 
   return {
+
     score,
-    matched,
-    missing,
-    totalKeywords: uniqueKeywords.length
+
+    matchedKeywords,
+
+    missingKeywords,
+
+    totalKeywords: jdWords.length
+
   };
+
 }
