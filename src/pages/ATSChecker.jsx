@@ -456,38 +456,25 @@ shadow-lg
                 Resume Uploaded Successfully
 
               </h2>
-              <div className="mt-5">
+              <div className="mt-5 text-white">
 
-                <p>
+  <p>
+    Pages : 1
+  </p>
 
-                  Pages : 1
+  <p>
+    Detected Skills : {analysis?.skills?.matchedSkills?.length}
+  </p>
 
-                </p>
+</div>
 
-                <p>
+<p className="mt-2 text-white">
+  {resume.name}
+</p>
 
-                  Words : {analysis?.wordCount}
-
-                </p>
-
-                <p>
-
-                  Detected Skills : {analysis?.skills?.matchedSkills?.length}
-
-                </p>
-
-              </div>
-              <p className="mt-2">
-
-                {resume.name}
-
-              </p>
-
-              <p className="text-slate-500">
-
-                {(resume.size / (1024 * 1024)).toFixed(2)} MB
-
-              </p>
+<p className="text-white">
+  {(resume.size / (1024 * 1024)).toFixed(2)} MB
+</p>
 
               <button
 

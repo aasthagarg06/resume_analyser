@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
-
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 function HeroSection() {
+  const navigate = useNavigate();
   return (
     <section
 className="
@@ -16,15 +18,15 @@ dark:bg-[#020617]
 "
 >
 
-  <div className="absolute inset-0 overflow-hidden">
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
   <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[140px]" />
 
   <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[140px]" />
 </div>
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-20 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
         {/* Left Side */}
-        <motion.div className="max-w-xl"
+        <motion.div className="relative z-30 max-w-xl"
           initial={{ opacity: 0, x: -80 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
@@ -98,25 +100,24 @@ max-w-lg text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">
           <div className="mt-8 flex flex-wrap gap-4">
 
             <button
-              className="
-                px-8
-                py-4
-                rounded-2xl
-                bg-linear-to-r
-                from-blue-600
-                to-violet-600
-                text-white
-                font-bold
-                shadow-lg
-                shadow-blue-500/30
-                hover:scale-105
-                hover:shadow-blue-500/60
-                transition-all
-                duration-300
-              "
-            >
-              Analyze Resume
-            </button>
+  onClick={() => navigate("/ats-checker")}
+  className="
+    px-8
+    py-4
+    rounded-2xl
+    bg-linear-to-r
+    from-blue-600
+    to-violet-600
+    text-white
+    font-bold
+    cursor-pointer
+    hover:scale-105
+    transition-all
+    duration-300
+  "
+>
+  Analyze Resume
+</button>
 
             <button
               className="
@@ -138,7 +139,7 @@ transition-all
 duration-300
 "
             >
-              Watch Demo
+              Learn How It Works
             </button>
 
           </div>
