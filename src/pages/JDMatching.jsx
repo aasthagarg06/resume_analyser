@@ -84,22 +84,29 @@ function JDMatching() {
     <section
 
       className="
-        relative
-        overflow-hidden
-        min-h-[calc(100vh-72px)]
-        bg-slate-950
-        text-white
-        px-6
-        py-20
-      "
+relative
+overflow-hidden
+min-h-[calc(100vh-72px)]
+bg-gradient-to-br
+from-slate-50
+via-blue-50
+to-violet-100
+dark:from-slate-950
+dark:via-slate-900
+dark:to-slate-950
+text-slate-900
+dark:text-white
+px-6
+py-20
+transition-colors
+duration-300
+"
     >
       {/* Background */}
       <div className="absolute inset-0 overflow-hidden">
 
-        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[140px]" />
-
-        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-violet-500/10 blur-[140px]" />
-
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-400/20 dark:bg-blue-500/10 blur-[140px]" />
+<div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-violet-400/20 dark:bg-violet-500/10 blur-[140px]" />
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
@@ -108,15 +115,27 @@ function JDMatching() {
           Compare Your Resume with a Job Description
         </h1>
 
-        <p className="text-center text-slate-300 mt-6 text-xl max-w-3xl mx-auto">
+        <p className="text-center text-slate-600 dark:text-slate-300 mt-6 text-xl max-w-3xl mx-auto">
           Discover how well your profile matches and identify missing
           skills, keywords and experience required for your dream role.
         </p>
 
         {/* Upload Card */}
 
-        <div className="mt-16 bg-slate-900/70 backdrop-blur rounded-3xl border border-slate-800 shadow-xl p-10">
-
+        <div
+  className="
+  mt-16
+  bg-white/90
+  dark:bg-slate-900/70
+  backdrop-blur-xl
+  rounded-3xl
+  border
+  border-slate-200
+  dark:border-white/10
+  shadow-xl
+  p-10
+"
+>
           <h2 className="text-2xl font-semibold mb-6">
             Upload Resume
           </h2>
@@ -135,8 +154,10 @@ function JDMatching() {
     rounded-3xl
     p-12
     cursor-pointer
-    bg-slate-900
-    hover:bg-slate-800
+    bg-slate-50
+dark:bg-slate-900
+hover:bg-blue-50
+dark:hover:bg-slate-800
     hover:border-blue-400
     transition-all
     duration-300
@@ -163,11 +184,11 @@ function JDMatching() {
                   Resume Uploaded Successfully
                 </h3>
 
-                <p className="mt-3 text-slate-300">
+                <p className="mt-3 text-slate-700 dark:text-slate-300">
                   {resume.name}
                 </p>
 
-                <p className="mt-2 text-sm text-slate-500">
+                <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
                   Click to upload another resume
                 </p>
 
@@ -185,7 +206,7 @@ function JDMatching() {
                   Drag & Drop Your Resume
                 </h3>
 
-                <p className="mt-3 text-slate-400">
+                <p className="mt-3 text-slate-600 dark:text-slate-400">
                   or <span className="text-blue-400 font-semibold">Browse Files</span>
                 </p>
 
@@ -215,17 +236,26 @@ function JDMatching() {
                 setJobDescription(e.target.value)
               }
               className="
-                w-full
-                rounded-2xl
-                bg-slate-800
-                border
-                border-slate-700
-                p-5
-                resize-none
-                outline-none
-                focus:border-blue-500
-                text-white
-              "
+w-full
+rounded-2xl
+bg-white
+dark:bg-slate-800
+border
+border-slate-300
+dark:border-slate-700
+p-5
+resize-none
+outline-none
+text-slate-900
+dark:text-white
+placeholder:text-slate-400
+dark:placeholder:text-slate-500
+focus:border-blue-500
+focus:ring-4
+focus:ring-blue-500/20
+transition-all
+duration-300
+"
             />
 
           </div>
@@ -237,20 +267,24 @@ function JDMatching() {
             onMouseDown={(e) => e.preventDefault()}
             onClick={handleMatch}
             className="
-              mt-10
-              w-full
-              py-4
-              rounded-2xl
-              bg-gradient-to-r
-              from-blue-500
-              via-indigo-500
-              to-violet-600
-              hover:scale-[1.02]
-              transition-all
-              duration-300
-              text-xl
-              font-semibold
-            "
+mt-10
+w-full
+py-4
+rounded-2xl
+bg-gradient-to-r
+from-blue-600
+via-indigo-600
+to-violet-600
+text-white
+text-xl
+font-semibold
+transition-all
+duration-300
+hover:-translate-y-1
+hover:shadow-2xl
+hover:shadow-blue-500/20
+active:scale-[0.98]
+"
           >
             Match Resume
           </button>
