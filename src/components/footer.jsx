@@ -126,12 +126,6 @@ function Footer() {
               </li>
 
               <li>
-                <Link to="/dashboard" className="hover:text-white transition">
-                  Dashboard
-                </Link>
-              </li>
-
-              <li>
                 <Link to="/contact" className="hover:text-white transition">
                   Contact
                 </Link>
@@ -225,17 +219,26 @@ function Footer() {
 
             <div className="flex gap-6 text-slate-400 text-sm">
 
-              <span className="hover:text-white cursor-pointer">
+              <Link
+                to="/privacy-policy"
+                className="hover:text-white transition-colors"
+              >
                 Privacy Policy
-              </span>
+              </Link>
 
-              <span className="hover:text-white cursor-pointer">
+              <Link
+                to="/terms-of-service"
+                className="hover:text-white transition-colors"
+              >
                 Terms of Service
-              </span>
+              </Link>
 
-              <span className="hover:text-white cursor-pointer">
+              <Link
+                to="/contact"
+                className="hover:text-white transition-colors"
+              >
                 Contact
-              </span>
+              </Link>
 
             </div>
 

@@ -68,7 +68,6 @@ function Navbar() {
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
               <Link
                 to="/"
-                onClick={scrollToTop}
               >
                 Home
               </Link>
@@ -77,7 +76,6 @@ function Navbar() {
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
               <Link
                 to="/ats-checker"
-                onClick={scrollToTop}
               >
                 ATS Checker
               </Link>
@@ -86,7 +84,6 @@ function Navbar() {
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
               <Link
                 to="/jd-matching"
-                onClick={scrollToTop}
               >
                 JD Match
               </Link>
@@ -95,9 +92,16 @@ function Navbar() {
             <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
               <Link
                 to="/about"
-                onClick={scrollToTop}
               >
                 About
+              </Link>
+            </li>
+
+            <li className="hover:text-blue-600 dark:hover:text-violet-400 transition-colors duration-300">
+              <Link
+                to="/contact"
+              >
+                Contact Us
               </Link>
             </li>
 

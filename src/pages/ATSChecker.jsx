@@ -2,7 +2,7 @@ import axios from "axios";
 import { extractText } from "../utils/extractText";
 import { validateResume } from "../utils/fileValidation";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import {
   saveResume,
   getRecentResumes
@@ -328,9 +328,7 @@ function ATSChecker() {
 
   };
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
+    <section
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="
         min-h-screen
@@ -456,25 +454,25 @@ shadow-lg
                 Resume Uploaded Successfully
 
               </h2>
-              <div className="mt-5 text-white">
+              <div className="mt-5 text-slate-700 dark:text-white">
 
-  <p>
-    Pages : 1
-  </p>
+                <p>
+                  Pages : 1
+                </p>
 
-  <p>
-    Detected Skills : {analysis?.skills?.matchedSkills?.length}
-  </p>
+                <p>
+                  Detected Skills : {analysis?.skills?.matchedSkills?.length}
+                </p>
 
-</div>
+              </div>
 
-<p className="mt-2 text-white">
-  {resume.name}
-</p>
+              <p className="mt-2 text-slate-700 dark:text-slate-300">
+                {resume.name}
+              </p>
 
-<p className="text-white">
-  {(resume.size / (1024 * 1024)).toFixed(2)} MB
-</p>
+              <p className="text-slate-700 dark:text-white">
+                {(resume.size / (1024 * 1024)).toFixed(2)} MB
+              </p>
 
               <button
 
@@ -573,7 +571,9 @@ text-white
                   styles={buildStyles({
                     textSize: "18px",
                     pathColor: "#2563eb",
-                    textColor: "#f8fafc",
+                    textColor: document.documentElement.classList.contains("dark")
+                      ? "#f8fafc"
+                      : "#0f172a",
                     trailColor: "#e5e7eb",
                   })}
                 />
@@ -663,7 +663,7 @@ text-white
     p-8
     mb-12">
 
-            <h2 className="text-3xl font-bold text-white mb-8">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-8">
 
               Contact Analysis
 
@@ -672,23 +672,23 @@ text-white
             <div className="grid md:grid-cols-5 gap-6">
 
               <div>
-                <h3 className="text-white">Email</h3>
-                <p className="text-white">{analysis.contact?.email ? "✅ Found" : "❌ Missing"}</p>
+                <h3 className="text-slate-900 dark:text-white">Email</h3>
+                <p className="text-slate-700 dark:text-slate-300">{analysis.contact?.email ? "✅ Found" : "❌ Missing"}</p>
               </div>
 
               <div>
-                <h3 className="text-white">Phone</h3>
-                <p className="text-white">{analysis.contact?.phone ? "✅ Found" : "❌ Missing"}</p>
+                <h3 className="text-slate-900 dark:text-white">Phone</h3>
+                <p className="text-slate-700 dark:text-slate-300">{analysis.contact?.phone ? "✅ Found" : "❌ Missing"}</p>
               </div>
 
               <div>
-                <h3 className="text-white">LinkedIn</h3>
-                <p className="text-white">{analysis.contact?.linkedin ? "✅ Found" : "❌ Missing"}</p>
+                <h3 className="text-slate-900 dark:text-white">LinkedIn</h3>
+                <p className="text-slate-700 dark:text-slate-300">{analysis.contact?.linkedin ? "✅ Found" : "❌ Missing"}</p>
               </div>
 
               <div>
-                <h3 className="text-white">GitHub</h3>
-                <p className="text-white">{analysis.contact?.github ? "✅ Found" : "❌ Missing"}</p>
+                <h3 className="text-slate-900 dark:text-white">GitHub</h3>
+                <p className="text-slate-700 dark:text-slate-300">{analysis.contact?.github ? "✅ Found" : "❌ Missing"}</p>
               </div>
 
 
@@ -711,7 +711,7 @@ text-white
     p-8
     mb-12">
 
-            <h2 className="text-3xl font-bold text-white mb-6">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
 
               Missing Sections
 
@@ -1021,7 +1021,7 @@ hover:shadow-lg
         />
       </div>
 
-    </motion.section >
+    </section >
   );
 }
 

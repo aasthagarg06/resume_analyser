@@ -20,6 +20,8 @@ import Contact from "./pages/Contact";
 import Login from "./components/LoginModal";
 import signup from "./components/SignupModal";
 import JDLearnMore from "./pages/JDLearnMore";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 function App() {
   return (
     <BrowserRouter>
@@ -55,17 +57,26 @@ function App() {
           />
 
           <Route
-  path="/jd-analysis"
-  element={<JDLearnMore />}
-/>
+            path="/jd-analysis"
+            element={<JDLearnMore />}
+          />
 
-<Route
-  path="/jd-matching"
-  element={<JDMatching />}
-/>
+          <Route
+            path="/jd-matching"
+            element={<JDMatching />}
+          />
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/contact" element={<Contact />} />
+          <Route
+            path="/privacy-policy"
+            element={<PrivacyPolicy />}
+          />
+
+          <Route
+            path="/terms-of-service"
+            element={<TermsOfService />}
+          />
 
         </Routes>
 

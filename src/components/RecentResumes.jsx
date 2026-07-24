@@ -26,7 +26,7 @@ export default function RecentResumes({
 
         <div className="mt-10">
 
-            <h2 className="text-2xl font-bold text-white mb-6">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
 
                 Recently Viewed
 
