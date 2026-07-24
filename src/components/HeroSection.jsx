@@ -6,7 +6,7 @@ function HeroSection() {
   const navigate = useNavigate();
   return (
     <section
-className="
+      className="
 relative
 overflow-hidden
 min-h-[calc(100vh-72px)]
@@ -16,13 +16,13 @@ px-6
 bg-slate-50
 dark:bg-[#020617]
 "
->
+    >
 
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-  <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[140px]" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-500/10 blur-[140px]" />
 
-  <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[140px]" />
-</div>
+        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[140px]" />
+      </div>
       <div className="relative z-20 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
         {/* Left Side */}
@@ -33,7 +33,7 @@ dark:bg-[#020617]
         >
 
           <div
-  className="
+            className="
     inline-block
     px-4
     py-2
@@ -46,7 +46,7 @@ dark:bg-[#020617]
     mb-4
     transition-colors
   "
->
+          >
             🚀 AI Powered Resume Analysis
           </div>
 
@@ -100,8 +100,8 @@ max-w-lg text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">
           <div className="mt-8 flex flex-wrap gap-4">
 
             <button
-  onClick={() => navigate("/ats-checker")}
-  className="
+              onClick={() => navigate("/ats-checker")}
+              className="
     px-8
     py-4
     rounded-2xl
@@ -115,32 +115,11 @@ max-w-lg text-slate-600 dark:text-slate-300 leading-relaxed transition-colors">
     transition-all
     duration-300
   "
->
-  Analyze Resume
-</button>
-
-            <button
-              className="
-px-8
-py-4
-rounded-2xl
-border
-border-slate-300
-dark:border-slate-700
-bg-white
-dark:bg-slate-800
-text-slate-800
-dark:text-white
-font-semibold
-hover:bg-slate-100
-dark:hover:bg-slate-700
-hover:scale-105
-transition-all
-duration-300
-"
             >
-              Learn How It Works
+              Analyze Resume
             </button>
+
+
 
           </div>
 

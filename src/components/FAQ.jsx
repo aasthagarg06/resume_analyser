@@ -63,9 +63,7 @@ function FAQ() {
 
         <div className="text-center mb-16">
 
-          <span className="text-blue-600 dark:text-blue-400 font-semibold tracking-wider transition-colors">
-            FAQ
-          </span>
+
 
           <h2 className="text-5xl font-bold mt-4 text-slate-900 dark:text-white transition-colors">
             Frequently Asked Questions

@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+// import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import JDResults from "../components/JDResults";
 import axios from "axios";
 function JDMatching() {
@@ -7,12 +7,20 @@ function JDMatching() {
   const [resume, setResume] = useState(null);
   const [jobDescription, setJobDescription] = useState("");
   const [result, setResult] = useState(null);
+  const scrollPositionRef = useRef(0);
 
   function handleResumeUpload(e) {
     if (e.target.files.length > 0) {
       setResume(e.target.files[0]);
     }
   }
+
+  // Restore scroll position when result updates
+  useEffect(() => {
+    if (result) {
+      window.scrollTo(0, scrollPositionRef.current);
+    }
+  }, [result]);
 
   async function handleMatch() {
 
@@ -32,6 +40,9 @@ function JDMatching() {
 
     }
 
+    // Save current scroll position
+    scrollPositionRef.current = window.scrollY;
+
     try {
 
       const formData = new FormData();
@@ -49,6 +60,7 @@ function JDMatching() {
       );
 
       setResult(response.data.result);
+      document.activeElement?.blur();
 
     }
 
@@ -69,10 +81,8 @@ function JDMatching() {
   }
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+    <section
+
       className="
         relative
         overflow-hidden
@@ -108,11 +118,11 @@ function JDMatching() {
         <div className="mt-16 bg-slate-900/70 backdrop-blur rounded-3xl border border-slate-800 shadow-xl p-10">
 
           <h2 className="text-2xl font-semibold mb-6">
-  Upload Resume
-</h2>
+            Upload Resume
+          </h2>
 
-<label
-  className="
+          <label
+            className="
     group
     flex
     flex-col
@@ -132,62 +142,62 @@ function JDMatching() {
     duration-300
     hover:scale-[1.01]
   "
->
+          >
 
-  <input
-    type="file"
-    accept=".pdf"
-    className="hidden"
-    onChange={handleResumeUpload}
-  />
+            <input
+              type="file"
+              accept=".pdf"
+              className="hidden"
+              onChange={handleResumeUpload}
+            />
 
-  {resume ? (
+            {resume ? (
 
-    <>
+              <>
 
-      <div className="text-6xl mb-5">
-        ✅
-      </div>
+                <div className="text-6xl mb-5">
+                  ✅
+                </div>
 
-      <h3 className="text-2xl font-bold text-green-400">
-        Resume Uploaded Successfully
-      </h3>
+                <h3 className="text-2xl font-bold text-green-400">
+                  Resume Uploaded Successfully
+                </h3>
 
-      <p className="mt-3 text-slate-300">
-        {resume.name}
-      </p>
+                <p className="mt-3 text-slate-300">
+                  {resume.name}
+                </p>
 
-      <p className="mt-2 text-sm text-slate-500">
-        Click to upload another resume
-      </p>
+                <p className="mt-2 text-sm text-slate-500">
+                  Click to upload another resume
+                </p>
 
-    </>
+              </>
 
-  ) : (
+            ) : (
 
-    <>
+              <>
 
-      <div className="text-6xl mb-5">
-        📄
-      </div>
+                <div className="text-6xl mb-5">
+                  📄
+                </div>
 
-      <h3 className="text-2xl font-bold">
-        Drag & Drop Your Resume
-      </h3>
+                <h3 className="text-2xl font-bold">
+                  Drag & Drop Your Resume
+                </h3>
 
-      <p className="mt-3 text-slate-400">
-        or <span className="text-blue-400 font-semibold">Browse Files</span>
-      </p>
+                <p className="mt-3 text-slate-400">
+                  or <span className="text-blue-400 font-semibold">Browse Files</span>
+                </p>
 
-      <p className="mt-6 text-sm text-slate-500">
-        Supported format: PDF (.pdf)
-      </p>
+                <p className="mt-6 text-sm text-slate-500">
+                  Supported format: PDF (.pdf)
+                </p>
 
-    </>
+              </>
 
-  )}
+            )}
 
-</label>
+          </label>
 
           {/* JD */}
 
@@ -223,6 +233,8 @@ function JDMatching() {
           {/* Button */}
 
           <button
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
             onClick={handleMatch}
             className="
               mt-10
@@ -247,7 +259,7 @@ function JDMatching() {
         <JDResults result={result} />
       </div>
 
-    </motion.section>
+    </section>
   );
 }
 

@@ -40,7 +40,7 @@ function FeatureSection() {
 
   return (
     <section
-  className="
+      className="
     py-24
     px-8
     lg:px-12
@@ -49,15 +49,13 @@ function FeatureSection() {
     transition-colors
     duration-300
   "
->
+    >
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
         <div className="text-center mb-16">
 
-          <span className="text-blue-600 dark:text-blue-400 font-semibold transition-colors">
-            FEATURES
-          </span>
+
 
           <h2 className="text-5xl font-bold mt-4 text-slate-900 dark:text-white transition-colors">
             Everything You Need
