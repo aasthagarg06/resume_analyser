@@ -24,20 +24,6 @@ function FeatureSection() {
     },
 
     {
-      icon: <FaBrain />,
-      title: "Skill Detection",
-      description:
-        "Extract technical and soft skills and identify missing competencies.",
-      points: [
-        "Technical Skills",
-        "Missing Skills",
-        "Skill Categories",
-      ],
-      color: "from-violet-500 to-purple-500",
-      link: "/ats-checker",
-    },
-
-    {
       icon: <FaBullseye />,
       title: "JD Matching",
       description:
@@ -48,21 +34,22 @@ function FeatureSection() {
         "Improvement Areas",
       ],
       color: "from-emerald-500 to-green-500",
-      link: "/jd-matching",
+      link: "/jd-analysis",
     },
   ];
 
   return (
     <section
-      className="
-        py-24
-        px-6
-        bg-white
-        dark:bg-slate-950
-        transition-colors
-        duration-300
-      "
-    >
+  className="
+    py-24
+    px-8
+    lg:px-12
+    bg-white
+    dark:bg-slate-950
+    transition-colors
+    duration-300
+  "
+>
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
@@ -84,7 +71,7 @@ function FeatureSection() {
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
 
           {features.map((feature, index) => (
 
@@ -94,7 +81,7 @@ function FeatureSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
-                duration: 0.5,
+                duration: 0.1,
                 delay: index * 0.15,
               }}
               whileHover={{

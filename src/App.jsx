@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import Contact from "./pages/Contact";
 import Login from "./components/LoginModal";
 import signup from "./components/SignupModal";
+import JDLearnMore from "./pages/JDLearnMore";
 function App() {
   return (
     <BrowserRouter>
@@ -54,9 +55,14 @@ function App() {
           />
 
           <Route
-            path="/jd-matching"
-            element={<JDMatching />}
-          />
+  path="/jd-analysis"
+  element={<JDLearnMore />}
+/>
+
+<Route
+  path="/jd-matching"
+  element={<JDMatching />}
+/>
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/contact" element={<Contact />} />
