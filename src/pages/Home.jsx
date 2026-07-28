@@ -1,9 +1,6 @@
 
 import HeroSection from "../components/HeroSection";
 import FeatureSection from "../components/FeatureSection";
-import ScoreCard from "../components/ScoreCard";
-import SkillsCard from "../components/SkillsCard";
-import SuggestionsCard from "../components/SuggestionsCard";
 import HowItWorks from "../components/HowItWorks";
 import FAQ from "../components/FAQ";
 function Home() {
@@ -20,10 +17,6 @@ function Home() {
       <FeatureSection />
       <HowItWorks />
       <FAQ />
-      <ScoreCard />
-      <SkillsCard />
-      <SuggestionsCard />
-
     </div>
   );
 }

@@ -112,6 +112,7 @@ function FAQ() {
                   justify-between
                   items-center
                   group
+                  cursor-pointer
                 "
               >
 
