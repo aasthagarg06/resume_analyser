@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 export default function Contact() {
     const [successMessage, setSuccessMessage] = useState("");
 
@@ -249,8 +251,8 @@ export default function Contact() {
                                 Browse our FAQ, Privacy Policy and Terms of Service for quick answers.
                             </p>
                             <div className="mt-6 flex flex-wrap gap-3">
-                                <a href="/privacy-policy" className="rounded-full bg-white/15 px-4 py-2 hover:bg-white/25 transition">Privacy Policy</a>
-                                <a href="/terms" className="rounded-full bg-white/15 px-4 py-2 hover:bg-white/25 transition">Terms</a>
+                                <Link to="/privacy-policy" className="rounded-full bg-white/15 px-4 py-2 hover:bg-white/25 transition">Privacy Policy</Link>
+                                <Link to="/terms-of-service" className="rounded-full bg-white/15 px-4 py-2 hover:bg-white/25 transition">Terms</Link>
                             </div>
                         </div>
 
