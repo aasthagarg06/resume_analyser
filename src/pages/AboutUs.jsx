@@ -1,3 +1,18 @@
+import {
+  FileText,
+  Target,
+  Sparkles,
+  GraduationCap,
+  Briefcase,
+  Rocket,
+  BarChart3,
+  SearchCheck,
+  Zap,
+  Bot,
+  ShieldCheck,
+  MonitorSmartphone,
+  CheckCircle2,
+} from "lucide-react";
 function AboutSection() {
   return (
     <section
@@ -151,7 +166,7 @@ function AboutSection() {
           mb-2
         "
       >
-        📄 Resume Analysis
+        <div className="flex items-center gap-4 mb-2"><div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-500/15 flex items-center justify-center"><FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" /></div><span>Resume Analysis</span></div>
       </h4>
 
       <p
@@ -176,7 +191,7 @@ function AboutSection() {
         rounded-3xl
         p-6
         shadow-lg
-        hover:border-violet-500
+        hover:border-blue-500
         hover:shadow-2xl
         transition
       "
@@ -191,7 +206,12 @@ function AboutSection() {
           mb-2
         "
       >
-        🎯 Job Description Matching
+<div className="flex items-center gap-4 mb-2">
+  <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-500/15 flex items-center justify-center">
+    <Target className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+  </div>
+  <span>Job Description Matching</span>
+</div>
       </h4>
 
       <p
@@ -216,7 +236,7 @@ function AboutSection() {
         rounded-3xl
         p-6
         shadow-lg
-        hover:border-emerald-500
+        hover:border-blue-500
         hover:shadow-2xl
         transition
       "
@@ -231,7 +251,12 @@ function AboutSection() {
           mb-2
         "
       >
-        💡 AI Recommendations
+<div className="flex items-center gap-4 mb-2">
+  <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-500/15 flex items-center justify-center">
+    <Sparkles className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+  </div>
+  <span>AI Recommendations</span>
+</div>
       </h4>
 
       <p
@@ -296,7 +321,26 @@ function AboutSection() {
     >
 
       <div className="text-5xl mb-6">
-        👩‍🎓
+        <div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <GraduationCap
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div>
       </div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
@@ -310,11 +354,11 @@ function AboutSection() {
 
       <ul className="space-y-3 text-slate-600 dark:text-slate-300">
 
-        <li>✓ Internship Applications</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Internship Applications</li>
 
-        <li>✓ Campus Placements</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Campus Placements</li>
 
-        <li>✓ Resume Building</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Resume Building</li>
 
       </ul>
 
@@ -334,14 +378,33 @@ function AboutSection() {
         shadow-md
         hover:-translate-y-2
         hover:shadow-2xl
-        hover:border-violet-500
+        hover:border-blue-500
         transition-all
         duration-300
       "
     >
 
       <div className="text-5xl mb-6">
-        💼
+        <div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <Briefcase
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div>
       </div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
@@ -355,11 +418,11 @@ function AboutSection() {
 
       <ul className="space-y-3 text-slate-600 dark:text-slate-300">
 
-        <li>✓ Entry-Level Jobs</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Entry-Level Jobs</li>
 
-        <li>✓ ATS Optimization</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />ATS Optimization</li>
 
-        <li>✓ Resume Enhancement</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Resume Enhancement</li>
 
       </ul>
 
@@ -379,14 +442,33 @@ function AboutSection() {
         shadow-md
         hover:-translate-y-2
         hover:shadow-2xl
-        hover:border-emerald-500
+        hover:border-blue-500
         transition-all
         duration-300
       "
     >
 
       <div className="text-5xl mb-6">
-        🚀
+        <div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <Rocket
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div>
       </div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
@@ -400,11 +482,11 @@ function AboutSection() {
 
       <ul className="space-y-3 text-slate-600 dark:text-slate-300">
 
-        <li>✓ Career Growth</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Career Growth</li>
 
-        <li>✓ Role Transitions</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Role Transitions</li>
 
-        <li>✓ Executive Resume Quality</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Executive Resume Quality</li>
 
       </ul>
 
@@ -460,7 +542,26 @@ function AboutSection() {
     >
 
       <div className="text-5xl mb-6">
-        📊
+        <div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <BarChart3
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div>
       </div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
@@ -474,11 +575,11 @@ function AboutSection() {
 
       <ul className="space-y-3 text-slate-600 dark:text-slate-300">
 
-        <li>✓ ATS Compatibility Score</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />ATS Compatibility Score</li>
 
-        <li>✓ Formatting Review</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Formatting Review</li>
 
-        <li>✓ Resume Structure Analysis</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Resume Structure Analysis</li>
 
       </ul>
 
@@ -498,7 +599,7 @@ function AboutSection() {
         p-8
         shadow-md
         hover:shadow-2xl
-        hover:border-violet-500
+        hover:border-blue-500
         transition-all
         duration-300
         hover:-translate-y-2
@@ -506,7 +607,26 @@ function AboutSection() {
     >
 
       <div className="text-5xl mb-6">
-        🎯
+        <div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <SearchCheck
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div>
       </div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
@@ -520,11 +640,11 @@ function AboutSection() {
 
       <ul className="space-y-3 text-slate-600 dark:text-slate-300">
 
-        <li>✓ Keyword Matching</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Keyword Matching</li>
 
-        <li>✓ Skill Gap Detection</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Skill Gap Detection</li>
 
-        <li>✓ Job Alignment Analysis</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Job Alignment Analysis</li>
 
       </ul>
 
@@ -544,7 +664,7 @@ function AboutSection() {
         p-8
         shadow-md
         hover:shadow-2xl
-        hover:border-emerald-500
+        hover:border-blue-500
         transition-all
         duration-300
         hover:-translate-y-2
@@ -552,7 +672,26 @@ function AboutSection() {
     >
 
       <div className="text-5xl mb-6">
-        💡
+        <div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <Sparkles
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div>
       </div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
@@ -566,11 +705,11 @@ function AboutSection() {
 
       <ul className="space-y-3 text-slate-600 dark:text-slate-300">
 
-        <li>✓ Resume Improvements</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Resume Improvements</li>
 
-        <li>✓ Better Content Suggestions</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Better Content Suggestions</li>
 
-        <li>✓ Actionable Recommendations</li>
+        <li className="flex items-center"><CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />Actionable Recommendations</li>
 
       </ul>
 
@@ -609,7 +748,26 @@ function AboutSection() {
 
     <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
 
-      <div className="text-5xl mb-5">⚡</div>
+      <div className="text-5xl mb-5"><div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <Zap
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div></div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
         Fast Analysis
@@ -623,9 +781,28 @@ function AboutSection() {
 
     {/* Card 2 */}
 
-    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-violet-500 hover:-translate-y-2 transition-all duration-300">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
 
-      <div className="text-5xl mb-5">🤖</div>
+      <div className="text-5xl mb-5"><div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <Bot
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div></div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
         AI-Powered Suggestions
@@ -640,9 +817,28 @@ function AboutSection() {
 
     {/* Card 3 */}
 
-    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-emerald-500 hover:-translate-y-2 transition-all duration-300">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
 
-      <div className="text-5xl mb-5">🎯</div>
+      <div className="text-5xl mb-5"><div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <SearchCheck
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div></div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
         Job Description Matching
@@ -657,9 +853,28 @@ function AboutSection() {
 
     {/* Card 4 */}
 
-    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-cyan-500 hover:-translate-y-2 transition-all duration-300">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
 
-      <div className="text-5xl mb-5">📄</div>
+      <div className="text-5xl mb-5"><div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <FileText
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div></div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
         ATS-Friendly Reports
@@ -674,9 +889,28 @@ function AboutSection() {
 
     {/* Card 5 */}
 
-    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-orange-500 hover:-translate-y-2 transition-all duration-300">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
 
-      <div className="text-5xl mb-5">🔒</div>
+      <div className="text-5xl mb-5"><div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <ShieldCheck
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div></div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
         Secure Resume Processing
@@ -691,9 +925,28 @@ function AboutSection() {
 
     {/* Card 6 */}
 
-    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-pink-500 hover:-translate-y-2 transition-all duration-300">
+    <div className="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-2xl hover:border-blue-500 hover:-translate-y-2 transition-all duration-300">
 
-      <div className="text-5xl mb-5">💻</div>
+      <div className="text-5xl mb-5"><div
+          className="
+            w-14
+            h-14
+            rounded-2xl
+            bg-blue-100
+            dark:bg-blue-500/15
+            flex
+            items-center
+            justify-center
+            transition-all
+            duration-300
+            group-hover:scale-110
+          "
+        >
+          <MonitorSmartphone
+            size={30}
+            className="text-blue-600 dark:text-blue-400"
+          />
+        </div></div>
 
       <h4 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
         Modern User Experience

@@ -14,8 +14,11 @@ import {
   GraduationCap,
   Lightbulb,
   Target,
+  ClipboardCheck,
+  SearchCheck,
+  Puzzle,
+  Rocket,
 } from "lucide-react";
-
 
 
 function JDLearnMore() {
@@ -932,138 +935,11 @@ function JDLearnMore() {
         </div>
 
       </section>
-
-      {/* ================= INTERPRET SCORE ================= */}
-
-      <section
-  className="
-    py-24
-    px-6
-    bg-white
-    dark:bg-slate-950
-    transition-colors
-    duration-300
-  "
->
-  <div className="max-w-5xl mx-auto">
-
-    <div className="text-center">
-
-      <h2
-        className="
-          text-4xl
-          font-bold
-          text-slate-900
-          dark:text-white
-          transition-colors
-          duration-300
-        "
-      >
-        How Match Scores Are Calculated
-      </h2>
-
-      <p
-        className="
-          mt-5
-          text-slate-600
-          dark:text-slate-400
-          transition-colors
-          duration-300
-        "
-      >
-        ResumeIQ evaluates multiple factors to estimate how well your
-        resume aligns with the selected job description.
-      </p>
-
-    </div>
-
-    <div className="space-y-10 mt-16">
-
-      {[
-        ["Skills Match", 30],
-        ["Keyword Match", 25],
-        ["Experience", 20],
-        ["Education", 15],
-        ["Overall Resume Alignment", 10],
-      ].map(([label, value]) => (
-
-        <div key={label}>
-
-          <div className="flex justify-between items-center mb-3">
-
-            <span
-              className="
-                font-semibold
-                text-slate-800
-                dark:text-slate-200
-              "
-            >
-              {label}
-            </span>
-
-            <span
-              className="
-                font-bold
-                text-slate-900
-                dark:text-white
-              "
-            >
-              {value}%
-            </span>
-
-          </div>
-
-          <div
-            className="
-              h-3
-              rounded-full
-              overflow-hidden
-              bg-slate-200
-              dark:bg-slate-800
-            "
-          >
-
-            <div
-              className="
-                h-full
-                rounded-full
-                bg-gradient-to-r
-                from-blue-500
-                to-violet-500
-              "
-              style={{ width: `${value}%` }}
-            />
-
-          </div>
-
-        </div>
-
-      ))}
-
-    </div>
-
-    <p
-      className="
-        mt-12
-        text-center
-        leading-8
-        text-slate-600
-        dark:text-slate-400
-        transition-colors
-        duration-300
-      "
-    >
-      The final compatibility score combines skills, keyword relevance,
-      experience, education, and overall alignment with the job
-      description to provide a balanced evaluation.
-    </p>
-
-  </div>
-</section>
+      
 
             {/* ================= WHY JD MATCHING MATTERS ================= */}
 
-      <section
+<section
   className="
     py-24
     px-6
@@ -1076,7 +952,6 @@ function JDLearnMore() {
   <div className="max-w-7xl mx-auto">
 
     <div className="text-center">
-
       <h2
         className="
           text-4xl
@@ -1105,103 +980,108 @@ function JDLearnMore() {
         Tailoring your resume to each job description can significantly
         improve your chances of getting shortlisted.
       </p>
-
     </div>
 
     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
 
       {[
         {
-          emoji: "🎯",
+          icon: ClipboardCheck,
           title: "Tailor Every Application",
           desc: "Customize your resume for every internship or job instead of sending the same resume everywhere.",
         },
         {
-          emoji: "📈",
+          icon: SearchCheck,
           title: "Improve ATS Compatibility",
           desc: "Include the keywords and technical skills recruiters and ATS systems expect to see.",
         },
         {
-          emoji: "🧩",
+          icon: Puzzle,
           title: "Identify Missing Skills",
           desc: "Discover which technologies, tools, or qualifications are missing before you apply.",
         },
         {
-          emoji: "🚀",
+          icon: Rocket,
           title: "Increase Interview Chances",
           desc: "A resume that closely matches the job description has a better chance of progressing through the screening process.",
         },
-      ].map((card) => (
+      ].map((card) => {
 
-        <div
-          key={card.title}
-          className="
-            group
-            rounded-3xl
+        const Icon = card.icon;
 
-            bg-white
-            dark:bg-slate-900
-
-            border
-            border-slate-200
-            dark:border-slate-700
-
-            shadow-lg
-            dark:shadow-black/30
-
-            p-8
-
-            transition-all
-            duration-300
-
-            hover:scale-[1.02]
-            hover:-translate-y-1
-            hover:border-blue-500
-            hover:shadow-2xl
-          "
-        >
+        return (
 
           <div
+            key={card.title}
             className="
-              text-5xl
-              transition-transform
+              group
+              rounded-3xl
+              bg-white
+              dark:bg-slate-900
+              border
+              border-slate-200
+              dark:border-slate-700
+              shadow-lg
+              dark:shadow-black/30
+              p-8
+              transition-all
               duration-300
-              group-hover:scale-110
+              hover:scale-[1.02]
+              hover:-translate-y-1
+              hover:border-blue-500
+              hover:shadow-2xl
             "
           >
-            {card.emoji}
+
+            <div
+              className="
+                w-14
+                h-14
+                rounded-2xl
+                bg-blue-100
+                dark:bg-blue-500/15
+                flex
+                items-center
+                justify-center
+                transition-all
+                duration-300
+                group-hover:scale-110
+              "
+            >
+              <Icon
+                size={30}
+                className="text-blue-600 dark:text-blue-400"
+              />
+            </div>
+
+            <h3
+              className="
+                mt-6
+                text-2xl
+                font-bold
+                text-slate-900
+                dark:text-white
+              "
+            >
+              {card.title}
+            </h3>
+
+            <p
+              className="
+                mt-5
+                leading-8
+                text-slate-600
+                dark:text-slate-300
+              "
+            >
+              {card.desc}
+            </p>
+
           </div>
 
-          <h3
-            className="
-              mt-6
-              text-2xl
-              font-bold
-              text-slate-900
-              dark:text-white
-              transition-colors
-              duration-300
-            "
-          >
-            {card.title}
-          </h3>
+        );
 
-          <p
-            className="
-              mt-5
-              leading-8
-              text-slate-600
-              dark:text-slate-300
-              transition-colors
-              duration-300
-            "
-          >
-            {card.desc}
-          </p>
-
-        </div>
-
-      ))}
+      })}
 
     </div>
 

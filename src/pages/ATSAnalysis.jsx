@@ -1,57 +1,76 @@
 import { useNavigate } from "react-router-dom";
+import {
+  FileUp,
+  FileSearch,
+  Bot,
+  FolderKanban,
+  BrainCircuit,
+  Search,
+  FileText,
+  Lightbulb,
+  BadgeCheck,
+  LayoutList,
+  ShieldCheck,
+  Target,
+  Briefcase,
+  TrendingUp,
+  AlertTriangle,
+  Sparkles,
+  CheckCircle2,
+} from "lucide-react";
 function ATSAnalysis() {
   const navigate = useNavigate();
   const steps = [
     {
-      icon: "📄",
+      icon: FileUp,
       title: "Resume Upload",
       description:
         "Upload your resume in PDF format. ResumeIQ securely processes the document while preserving the original file.",
     },
     {
-      icon: "📝",
+      icon: FileSearch,
       title: "Text Extraction",
       description:
         "The resume text is extracted from the uploaded document so it can be analyzed accurately by our AI engine.",
     },
     {
-      icon: "🤖",
+      icon: Bot,
       title: "AI Resume Analysis",
       description:
         "Our AI evaluates your resume's structure, formatting, skills, keywords, and overall ATS compatibility.",
     },
     {
-      icon: "📂",
+      icon: FolderKanban,
       title: "Section Detection",
       description:
         "ResumeIQ identifies important sections such as Contact Information, Education, Experience, Skills, Projects, and Certifications.",
     },
     {
-      icon: "🛠",
+      icon: BrainCircuit,
       title: "Skill Detection",
       description:
         "Technical and professional skills are detected to understand your strengths and identify missing competencies.",
     },
     {
-      icon: "🔍",
+      icon: Search,
       title: "Keyword Analysis",
       description:
         "Relevant keywords are analyzed to determine how well your resume aligns with modern Applicant Tracking Systems.",
     },
     {
-      icon: "📊",
+      icon: FileText,
       title: "Formatting Review",
       description:
         "The system reviews your resume for ATS-friendly formatting, clean organization, readability, and standard section headings.",
     },
     {
-      icon: "💡",
+      icon: Lightbulb,
       title: "Personalized Suggestions",
       description:
         "AI-generated recommendations help improve resume quality by highlighting missing skills, weak sections, and optimization opportunities.",
     },
     {
-      icon: "✅",
+      icon: BadgeCheck,
       title: "Final ATS Report",
       description:
         "Receive a comprehensive report including ATS score, skill analysis, formatting insights, keyword evaluation, and improvement suggestions.",
@@ -60,32 +79,32 @@ function ATSAnalysis() {
 
   const reports = [
   {
-    icon: "🎯",
+    icon: Target,
     title: "Overall ATS Score",
     desc: "A combined score based on formatting, keywords, sections, and resume quality.",
   },
   {
-    icon: "🛠",
+    icon: BrainCircuit,
     title: "Skills Analysis",
     desc: "Identifies technical and professional skills detected within your resume.",
   },
   {
-    icon: "🔍",
+    icon: Search,
     title: "Keyword Insights",
     desc: "Highlights relevant keywords and identifies missing ones.",
   },
   {
-    icon: "📂",
+    icon: FolderKanban,
     title: "Section Analysis",
     desc: "Checks whether important resume sections are present and well organized.",
   },
   {
-    icon: "📞",
+    icon: ShieldCheck,
     title: "Contact Validation",
     desc: "Verifies essential contact information like email, phone, LinkedIn, and GitHub.",
   },
   {
-    icon: "💡",
+    icon: Lightbulb,
     title: "AI Recommendations",
     desc: "Provides personalized suggestions to improve ATS compatibility.",
   },
@@ -156,7 +175,9 @@ hover:shadow-xl
 hover:border-blue-500
 "
               >
-                <div className="text-5xl">{step.icon}</div>
+                <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-4">
+  {(() => { const Icon = step.icon; return <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />; })()}
+</div>
 
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
@@ -191,32 +212,32 @@ What We Analyze
 
 {[
 {
-icon:"📄",
+icon: FileText,
 title:"Resume Formatting",
 items:["Layout","ATS Compatibility","Readability"]
 },
 {
-icon:"🔍",
+icon: Search,
 title:"Keyword Matching",
 items:["Important Keywords","Missing Keywords","Optimization"]
 },
 {
-icon:"🛠",
+icon: BrainCircuit,
 title:"Skills Detection",
 items:["Technical Skills","Soft Skills","Missing Skills"]
 },
 {
-icon:"📂",
+icon: LayoutList,
 title:"Section Analysis",
 items:["Experience","Education","Projects"]
 },
 {
-icon:"📞",
+icon: ShieldCheck,
 title:"Contact Validation",
 items:["Email","Phone","LinkedIn"]
 },
 {
-icon:"💡",
+icon: Sparkles,
 title:"AI Suggestions",
 items:["Weaknesses","Improvements","Recommendations"]
 },
@@ -245,7 +266,9 @@ hover:shadow-xl
 hover:border-blue-500
 ">
 
-<div className="text-5xl mb-5">{card.icon}</div>
+<div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-5">
+  {(() => { const Icon = card.icon; return <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />; })()}
+</div>
 
 <h3 className="text-2xl font-bold mb-5 text-slate-900 dark:text-white">
 {card.title}
@@ -259,7 +282,7 @@ key={i}
 className="flex items-center gap-3 text-slate-600 dark:text-slate-300"
 >
 
-<span className="text-green-500">✔</span>
+<CheckCircle2 className="w-5 h-5 text-green-500" />
 
 {item}
 
@@ -352,22 +375,22 @@ evaluation.
 
       {[
         {
-          icon:"🎯",
+          icon: Target,
           title:"Overall ATS Score",
           desc:"Represents how well your resume follows common ATS best practices. It combines formatting, skills, sections, experience, and content quality."
         },
         {
-          icon:"📄",
+          icon: FileText,
           title:"Formatting Score",
           desc:"Checks layout, headings, spacing, readability, and ATS-friendly formatting."
         },
         {
-          icon:"📂",
+          icon: LayoutList,
           title:"Sections Score",
           desc:"Evaluates whether important sections like Education, Experience, Skills, Projects, Certifications, and Achievements are included."
         },
         {
-          icon:"💼",
+          icon: Briefcase,
           title:"Experience Score",
           desc:"Measures how well your experience demonstrates responsibilities, achievements, action verbs, and measurable impact."
         }
@@ -396,7 +419,9 @@ hover:-translate-y-1
 hover:shadow-xl
 hover:border-blue-500
 "        >
-          <div className="text-5xl mb-5">{item.icon}</div>
+          <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-5">
+  {(() => { const Icon = item.icon; return <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />; })()}
+</div>
 
           <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
             {item.title}
@@ -428,32 +453,32 @@ hover:border-blue-500
 
       {[
         {
-          icon:"🤖",
+          icon: Bot,
           title:"AI Summary",
           desc:"Provides a recruiter-friendly overview of your resume, highlighting your education, technical skills, and overall profile."
         },
         {
-          icon:"🛠",
+          icon: BrainCircuit,
           title:"Skills Found",
           desc:"Automatically detects technical and professional skills mentioned in your resume."
         },
         {
-          icon:"💪",
+          icon: TrendingUp,
           title:"Strengths",
           desc:"Highlights the strongest ATS-friendly aspects of your resume."
         },
         {
-          icon:"⚠",
+          icon: AlertTriangle,
           title:"Weaknesses",
           desc:"Identifies missing information, weak content, or formatting issues that may reduce ATS compatibility."
         },
         {
-          icon:"💡",
+          icon: Sparkles,
           title:"AI Suggestions",
           desc:"Provides personalized recommendations to improve your resume before applying."
         },
         {
-          icon:"📈",
+          icon: Target,
           title:"Resume Improvement",
           desc:"Use the AI recommendations to continuously improve your resume and increase ATS compatibility."
         }
@@ -481,7 +506,9 @@ hover:-translate-y-1
 hover:shadow-xl
 hover:border-blue-500
 "        >
-          <div className="text-5xl mb-5">{item.icon}</div>
+          <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-5">
+  {(() => { const Icon = item.icon; return <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />; })()}
+</div>
 
           <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">
             {item.title}
@@ -633,7 +660,9 @@ hover:-translate-y-1
 hover:shadow-xl
 hover:border-blue-500
 "        >
-          <div className="text-5xl mb-5">{item.icon}</div>
+          <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-5">
+  {(() => { const Icon = item.icon; return <Icon className="w-7 h-7 text-blue-600 dark:text-blue-400" />; })()}
+</div>
 
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">
             {item.title}
