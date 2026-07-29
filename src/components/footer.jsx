@@ -178,16 +178,17 @@ function Footer() {
                 disabled={loading}
                 className="
                   w-full
-                  mt-3
-                  py-3
-                  rounded-xl
-                  bg-linear-to-r
-                  from-blue-600
-                  to-violet-600
-                  font-semibold
-                  hover:scale-105
-                  transition
-                  disabled:opacity-60
+    mt-3
+    py-3
+    rounded-xl
+    bg-linear-to-r
+    from-blue-600
+    to-violet-600
+    font-semibold
+    hover:scale-105
+    transition
+    disabled:opacity-60
+    cursor-pointer
                 "
               >
                 {loading ? "Subscribing..." : "Subscribe"}

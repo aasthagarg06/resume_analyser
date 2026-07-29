@@ -199,29 +199,6 @@ function JDLearnMore() {
       evaluate experience, and provide AI-powered recommendations that
       help you tailor your resume for every opportunity.
     </p>
-
-    <button
-      onClick={() => navigate("/jd-matching")}
-      className="
-        mt-12
-        px-10
-        py-4
-        rounded-2xl
-        bg-gradient-to-r
-        from-blue-600
-        to-violet-600
-        text-white
-        text-lg
-        font-bold
-        shadow-lg
-        hover:scale-[1.02]
-        hover:shadow-2xl
-        transition-all
-        duration-300
-      "
-    >
-      Compare Resume
-    </button>
   </motion.div>
 </section>
 

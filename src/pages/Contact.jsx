@@ -204,6 +204,7 @@ export default function Contact() {
     hover:to-violet-500
     active:scale-95
     transition-all
+    cursor-pointer
     duration-300"
                             >
                                 Send Message →
