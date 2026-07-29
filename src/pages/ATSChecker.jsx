@@ -99,7 +99,7 @@ function ATSChecker() {
       formData.append("resume", resume);
 
       const response = await axios.post(
-        "https://resumeiq-wghn.onrender.com/api/analyze",
+        "http://localhost:5000/api/analyze",
         formData
       );
 
@@ -571,10 +571,13 @@ text-white
                   styles={buildStyles({
                     textSize: "18px",
                     pathColor: "#2563eb",
-                    textColor: document.documentElement.classList.contains("dark")
-                      ? "#f8fafc"
-                      : "#0f172a",
                     trailColor: "#e5e7eb",
+
+                    textColor: document.documentElement.classList.contains("dark")
+                      ? "#ffffff"
+                      : "#111827",
+
+                    textWeight: "700",
                   })}
                 />
               </div>

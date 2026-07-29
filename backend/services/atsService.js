@@ -75,44 +75,35 @@ export async function analyzeResumeService(file) {
 
     // Gemini AI Analysis
     const raw = await analyzeATS({
-
         resumeText,
-
         overallScore,
-
         formatting,
-
         contact,
-
         sections,
-
         skills,
-
         dates,
-
         experience,
-
-        projects
-
+        projects,
     });
+
+    console.log("========== GROQ RESPONSE ==========");
+    console.log(raw);
 
     let gemini;
 
     try {
 
-        const cleaned = raw
-            .replace(/```json/g, "")
-            .replace(/```/g, "")
-            .trim();
+        gemini = JSON.parse(raw);
 
-        gemini = JSON.parse(cleaned);
+        console.log("========== PARSED GROQ ==========");
+        console.log(gemini);
 
     } catch (err) {
 
-        console.error("Gemini Parse Error");
+        console.error("Groq JSON Parse Error");
         console.error(raw);
 
-        throw new Error("Gemini returned invalid JSON.");
+        throw new Error("Groq returned invalid JSON.");
 
     }
 
