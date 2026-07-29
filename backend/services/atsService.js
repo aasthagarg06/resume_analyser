@@ -1,4 +1,4 @@
-import { parsePDF } from "../utils/pdfParser.js";
+import { parsePDF } from "../Utils/pdfParser.js";
 import buildResume from "../core/resumeBuilder.js";
 
 import { formattingAnalyzer } from "../analysis/formattingAnalyzer.js";

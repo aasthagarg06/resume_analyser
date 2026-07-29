@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import { extractText } from "../utils/extractText";
-import { validateResume } from "../utils/fileValidation";
+import { extractText } from "../Utils/extractText";
+import { validateResume } from "../Utils/fileValidation";
 import { UploadCloud, CheckCircle2, X } from "lucide-react";
 function UploadResume() {
   const [file, setFile] = useState(null);

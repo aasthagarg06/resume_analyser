@@ -1,4 +1,4 @@
-import { resolveAlias } from "./utils/aliasResolver.js";
+import { resolveAlias } from "./Utils/aliasResolver.js";
 
 console.log(resolveAlias("ReactJS"));
 

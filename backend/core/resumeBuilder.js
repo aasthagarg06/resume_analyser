@@ -1,5 +1,5 @@
-import { normalizeText } from "../utils/normalizeText.js";
-import { tokenize } from "../utils/tokenizer.js";
+import { normalizeText } from "../Utils/normalizeText.js";
+import { tokenize } from "../Utils/tokenizer.js";
 import detectSections from "./sectionDetector.js";
 
 export default function buildResume(rawText) {

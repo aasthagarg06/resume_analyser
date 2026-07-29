@@ -1,12 +1,12 @@
 import axios from "axios";
-import { extractText } from "../utils/extractText";
-import { validateResume } from "../utils/fileValidation";
+import { extractText } from "../Utils/extractText";
+import { validateResume } from "../Utils/fileValidation";
 import { useState, useEffect } from "react";
 // import { motion } from "framer-motion";
 import {
   saveResume,
   getRecentResumes
-} from "../utils/localStorage";
+} from "../Utils/localStorage";
 import RecentResumes from "../components/RecentResumes";
 import {
   CircularProgressbar,

@@ -1,4 +1,4 @@
-import { normalizeText } from "../../utils/normalizeText.js";
+import { normalizeText } from "../../Utils/normalizeText.js";
 
 export function parseResume(resume) {
 
