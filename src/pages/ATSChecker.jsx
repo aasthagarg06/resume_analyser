@@ -99,7 +99,7 @@ function ATSChecker() {
       formData.append("resume", resume);
 
       const response = await axios.post(
-        "http://localhost:5000/api/analyze",
+        "https://resumeiq-wghn.onrender.com/api/analyze",
         formData
       );
 

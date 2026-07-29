@@ -53,7 +53,7 @@ function JDMatching() {
 
       const response = await axios.post(
 
-        "http://localhost:5000/api/jd-match",
+        "https://resumeiq-wghn.onrender.com/api/jd-match",
 
         formData
 
@@ -106,7 +106,7 @@ duration-300
       <div className="absolute inset-0 overflow-hidden">
 
         <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-blue-400/20 dark:bg-blue-500/10 blur-[140px]" />
-<div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-violet-400/20 dark:bg-violet-500/10 blur-[140px]" />
+        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] rounded-full bg-violet-400/20 dark:bg-violet-500/10 blur-[140px]" />
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
@@ -123,7 +123,7 @@ duration-300
         {/* Upload Card */}
 
         <div
-  className="
+          className="
   mt-16
   bg-white/90
   dark:bg-slate-900/70
@@ -135,7 +135,7 @@ duration-300
   shadow-xl
   p-10
 "
->
+        >
           <h2 className="text-2xl font-semibold mb-6">
             Upload Resume
           </h2>
