@@ -132,7 +132,7 @@ function TermsOfService() {
               </h2>
 
               <p className="mt-4 leading-8 text-slate-600 dark:text-slate-300">
-                ATS scores, resume analysis, and job matching results are
+                Resume analysis, and job matching results are
                 generated using AI-powered algorithms. These insights are
                 intended to assist users and should not be interpreted as a
                 guarantee of interviews, hiring decisions, or employment.

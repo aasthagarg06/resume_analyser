@@ -46,7 +46,7 @@ const sections = [
     title: "Third-Party Services",
     icon: Sparkles,
     body:
-      "ResumeIQ integrates Clerk for authentication and Google Gemini API for AI-powered analysis.",
+      "ResumeIQ integrates Clerk for authentication and Groq API for AI-powered analysis.",
   },
   {
     id: "contact",
