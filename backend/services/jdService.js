@@ -9,6 +9,8 @@ import { educationMatcher } from "../analysis/educationMatcher.js";
 
 import { overallMatcher } from "../matching/overallMatcher.js";
 
+import { analyzeJD } from "./jdAIService.js";
+
 import { jdReportGenerator } from "../reporting/jdReportGenerator.js";
 
 export async function jdService(file, jobDescription) {
@@ -21,11 +23,18 @@ export async function jdService(file, jobDescription) {
         throw new Error("Job Description is required.");
     }
 
+    // -----------------------------
+    // Parse Resume
+    // -----------------------------
     const parsedResume = await parsePDF(file.buffer);
 
-    const resume = buildResume(parsedResume.text);
+    const resumeText = parsedResume.text;
 
-    // Matchers
+    const resume = buildResume(resumeText);
+
+    // -----------------------------
+    // Rule-Based Matching
+    // -----------------------------
     const skills = jdSkillMatcher(
         resume.normalizedText,
         jobDescription
@@ -46,7 +55,9 @@ export async function jdService(file, jobDescription) {
         jobDescription
     );
 
-    // Overall Score
+    // -----------------------------
+    // Overall Match Score
+    // -----------------------------
     const overall = overallMatcher({
 
         skills,
@@ -58,9 +69,24 @@ export async function jdService(file, jobDescription) {
         education
 
     });
-    console.log(parsedResume.text);
-    // Final Report
-    return jdReportGenerator({
+
+    console.log("========== JD MATCH ==========");
+    console.log({
+        overall,
+        skills,
+        keywords,
+        experience,
+        education
+    });
+
+    // -----------------------------
+    // AI Analysis (Groq)
+    // -----------------------------
+    const raw = await analyzeJD({
+
+        resumeText,
+
+        jobDescription,
 
         overall,
 
@@ -71,6 +97,52 @@ export async function jdService(file, jobDescription) {
         experience,
 
         education
+
+    });
+
+    console.log("========== GROQ JD RESPONSE ==========");
+    console.log(raw);
+
+    let ai;
+
+    try {
+
+        ai = JSON.parse(raw);
+
+        console.log("========== PARSED JD AI ==========");
+        console.log(ai);
+
+    } catch (err) {
+
+        console.error("JD AI Parse Error");
+        console.error(raw);
+
+        throw new Error("JD AI returned invalid JSON.");
+
+    }
+
+    // -----------------------------
+    // Final Report
+    // -----------------------------
+    return jdReportGenerator({
+
+        overall,
+
+        skills,
+
+        keywords,
+
+        experience,
+
+        education,
+
+        summary: ai.summary || "",
+
+        aiStrengths: ai.strengths || [],
+
+        aiWeaknesses: ai.weaknesses || [],
+
+        aiSuggestions: ai.suggestions || []
 
     });
 

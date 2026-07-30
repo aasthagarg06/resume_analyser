@@ -6,7 +6,7 @@ import {
 
     deleteResume
 
-} from "../utils/localStorage";
+} from "../Utils/localStorage";
 
 export default function RecentResumes({
     resumes,

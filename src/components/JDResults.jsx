@@ -1,5 +1,6 @@
 import React from "react";
 
+
 function ScoreCard({ title, score, color }) {
   return (
     <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-slate-900/70 backdrop-blur-xl shadow-lg p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -14,13 +15,12 @@ function ScoreCard({ title, score, color }) {
   );
 }
 
-function Chip({ children, type="green" }) {
+function Chip({ children, type = "green" }) {
   return (
-    <span className={`px-4 py-2 rounded-full text-sm font-medium ${
-      type==="green"
+    <span className={`px-4 py-2 rounded-full text-sm font-medium ${type === "green"
       ? "bg-green-100 text-green-700 dark:bg-green-500/20 dark:text-green-300"
       : "bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300"
-    }`}>
+      }`}>
       {children}
     </span>
   );
@@ -56,7 +56,7 @@ export default function JDResults({ result }) {
       <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-slate-900/70 backdrop-blur-xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Resume Strength Analysis</h2>
         <div className="mt-6 space-y-4">
-          {result.strengths.map((item,index)=>(
+          {result.strengths.map((item, index) => (
             <div key={index} className="rounded-2xl bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 p-4">
               <p className="text-green-700 dark:text-green-300">✓ {item}</p>
             </div>
@@ -67,7 +67,7 @@ export default function JDResults({ result }) {
       <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-slate-900/70 backdrop-blur-xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Areas to Improve</h2>
         <div className="mt-6 space-y-4">
-          {result.weaknesses.map((item,index)=>(
+          {result.weaknesses.map((item, index) => (
             <div key={index} className="rounded-2xl bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 p-4">
               <p className="text-red-700 dark:text-red-300">✗ {item}</p>
             </div>
@@ -85,7 +85,7 @@ export default function JDResults({ result }) {
       <div className="rounded-3xl border border-slate-200 dark:border-white/10 bg-white/90 dark:bg-slate-900/70 backdrop-blur-xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-slate-900 dark:text-white">AI Suggestions</h2>
         <div className="mt-6 space-y-4">
-          {result.suggestions.map((item,index)=>(
+          {result.suggestions.map((item, index) => (
             <div key={index} className="rounded-2xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 p-4">
               <p className="text-blue-700 dark:text-blue-300">💡 {item}</p>
             </div>
@@ -95,3 +95,4 @@ export default function JDResults({ result }) {
     </div>
   );
 }
+

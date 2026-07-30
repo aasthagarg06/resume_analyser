@@ -8,14 +8,32 @@ export function jdReportGenerator({
 
     experience,
 
-    education
+    education,
+
+    summary = "",
+
+    aiStrengths = [],
+
+    aiWeaknesses = [],
+
+    aiSuggestions = []
 
 }) {
 
-    const suggestions = [];
-    const strengths = [];
-    const weaknesses = [];
-    // Missing Skills Suggestions
+    // -------------------------
+    // Start with AI Output
+    // -------------------------
+
+    const suggestions = [...aiSuggestions];
+
+    const strengths = [...aiStrengths];
+
+    const weaknesses = [...aiWeaknesses];
+
+    // -------------------------
+    // Rule-Based Suggestions
+    // -------------------------
+
     skills.missingSkills.forEach(skill => {
 
         suggestions.push(
@@ -24,7 +42,6 @@ export function jdReportGenerator({
 
     });
 
-    // Missing Education Suggestions
     education.missingEducation.forEach(item => {
 
         suggestions.push(
@@ -33,7 +50,6 @@ export function jdReportGenerator({
 
     });
 
-    // Experience Suggestion
     if (experience.score < 100) {
 
         suggestions.push(
@@ -42,7 +58,6 @@ export function jdReportGenerator({
 
     }
 
-    // Keyword Suggestions
     keywords.missingKeywords
         .slice(0, 5)
         .forEach(keyword => {
@@ -52,8 +67,9 @@ export function jdReportGenerator({
             );
 
         });
+
     // -------------------------
-    // Strengths
+    // Rule-Based Strengths
     // -------------------------
 
     if (skills.matchedSkills.length >= 5) {
@@ -67,7 +83,9 @@ export function jdReportGenerator({
     if (skills.matchedSkills.length > 0) {
 
         strengths.push(
-            `Your resume demonstrates experience with ${skills.matchedSkills.slice(0, 5).join(", ")}.`
+            `Your resume demonstrates experience with ${skills.matchedSkills
+                .slice(0, 5)
+                .join(", ")}.`
         );
 
     }
@@ -97,7 +115,7 @@ export function jdReportGenerator({
     }
 
     // -------------------------
-    // Weaknesses
+    // Rule-Based Weaknesses
     // -------------------------
 
     if (skills.missingSkills.length > 0) {
@@ -133,6 +151,21 @@ export function jdReportGenerator({
         );
 
     }
+
+    // -------------------------
+    // Remove duplicates
+    // -------------------------
+
+    const uniqueSuggestions = [...new Set(suggestions)];
+
+    const uniqueStrengths = [...new Set(strengths)];
+
+    const uniqueWeaknesses = [...new Set(weaknesses)];
+
+    // -------------------------
+    // Final Report
+    // -------------------------
+
     return {
 
         overallScore: overall.overallScore,
@@ -148,9 +181,6 @@ export function jdReportGenerator({
         matchedSkills: skills.matchedSkills,
 
         missingSkills: skills.missingSkills,
-        strengths,
-
-        weaknesses,
 
         matchedKeywords: keywords.matchedKeywords,
 
@@ -170,7 +200,13 @@ export function jdReportGenerator({
 
         resumeYears: experience.resumeYears,
 
-        suggestions
+        summary,
+
+        strengths: uniqueStrengths,
+
+        weaknesses: uniqueWeaknesses,
+
+        suggestions: uniqueSuggestions
 
     };
 

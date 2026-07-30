@@ -1,172 +1,123 @@
-import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const ai = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY,
+console.log("Groq key loaded:", !!process.env.GROQ_API_KEY);
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function analyzeATS({
-
   resumeText,
-
   overallScore,
-
   formatting,
-
   contact,
-
   sections,
-
   skills,
-
   dates,
-
   experience,
-
-  projects
-
+  projects,
 }) {
-
+  console.log("USING GROQ SERVICE");
   const prompt = `
+You are an experienced ATS Resume Reviewer.
 
-You are an expert ATS Resume Reviewer.
+The ATS score has ALREADY been calculated.
+Never recalculate or modify it.
 
-IMPORTANT RULES
+Your job is ONLY to generate human-readable feedback based on the structured analysis.
 
-You are NOT allowed to calculate the ATS score.
-
-The ATS score has already been calculated by the system.
-
-DO NOT change it.
-
-DO NOT recalculate it.
-
-DO NOT invent missing skills.
-
-DO NOT invent future dates.
-
-DO NOT claim contact information is missing if the analysis says it exists.
-
-Use ONLY the structured analysis below.
-
---------------------------------------------------
-
+========================
 ATS SCORE
-
+========================
 ${overallScore}
 
---------------------------------------------------
+========================
+ANALYSIS
+========================
 
-FORMATTING
+Formatting:
+${JSON.stringify(formatting)}
 
-${JSON.stringify(formatting, null, 2)}
+Contact:
+${JSON.stringify(contact)}
 
---------------------------------------------------
+Sections:
+${JSON.stringify(sections)}
 
-CONTACT INFORMATION
+Skills:
+${JSON.stringify(skills)}
 
-${JSON.stringify(contact, null, 2)}
+Dates:
+${JSON.stringify(dates)}
 
---------------------------------------------------
+Experience:
+${JSON.stringify(experience)}
 
-SECTIONS
+Projects:
+${JSON.stringify(projects)}
 
-${JSON.stringify(sections, null, 2)}
-
---------------------------------------------------
-
-SKILLS
-
-${JSON.stringify(skills, null, 2)}
-
---------------------------------------------------
-
-DATE ANALYSIS
-
-${JSON.stringify(dates, null, 2)}
-
---------------------------------------------------
-
-EXPERIENCE
-
-${JSON.stringify(experience, null, 2)}
-
---------------------------------------------------
-
-PROJECTS
-
-${JSON.stringify(projects, null, 2)}
-
---------------------------------------------------
-
-RESUME
+========================
+Resume (Context Only)
+========================
 
 ${resumeText}
 
---------------------------------------------------
+========================
+Instructions
+========================
 
-TASK
+Generate:
 
-Using ONLY the information above,
+1. 4-6 personalized strengths
+2. 3-5 realistic weaknesses
+3. 5 actionable suggestions
+4. One professional summary (80-120 words)
 
-generate
+Rules:
 
-1. Strengths
+- Never invent skills.
+- Never invent experience.
+- Never invent projects.
+- Never change the ATS score.
+- Never recommend something already present.
+- Mention missing skills only if they actually appear in missingSkills.
+- Suggestions must be specific to THIS resume.
+- Avoid generic advice like "improve your resume".
+- Sound like a professional recruiter.
 
-2. Weaknesses
-
-3. Suggestions
-
-4. Professional Summary
-
-Rules
-
-• Do not invent facts.
-
-• Do not mention missing GitHub if GitHub exists.
-
-• Do not mention future dates unless date analysis reports them.
-
-• Do not mention placeholder information.
-
-• Keep suggestions practical.
-
-• Keep strengths resume-specific.
-
-• Keep weaknesses genuine.
-
-Return ONLY JSON.
+Return ONLY valid JSON.
 
 {
-
-"strengths":[
-"..."
-],
-
-"weaknesses":[
-"..."
-],
-
-"suggestions":[
-"..."
-],
-
-"summary":""
-
+  "strengths": [],
+  "weaknesses": [],
+  "suggestions": [],
+  "summary": ""
 }
-
 `;
 
-  const response = await ai.models.generateContent({
+  const completion = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
 
-    model: "gemini-2.5-flash",
+    temperature: 0.2,
 
-    contents: prompt
+    response_format: {
+      type: "json_object",
+    },
 
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are a senior ATS recruiter. Return valid JSON only.",
+      },
+      {
+        role: "user",
+        content: prompt,
+      },
+    ],
   });
-
-  return response.text;
-
+  console.log("========== GROQ RESPONSE ==========");
+  console.log(completion.choices[0].message.content);
+  return completion.choices[0].message.content;
 }
