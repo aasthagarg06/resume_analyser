@@ -52,7 +52,7 @@ function JDMatching() {
       formData.append("jobDescription", jobDescription);
 
       const response = await axios.post(
-        "http://localhost:5000/api/jd-match",
+        "https://resumeiq-wghn.onrender.com/api/jd-match",
         formData
       );
 
