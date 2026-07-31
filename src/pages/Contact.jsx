@@ -226,22 +226,24 @@ export default function Contact() {
 
                                 <div>
                                     <p className="font-semibold text-slate-900 dark:text-white">💼 LinkedIn</p>
-                                    <a href="https://www.linkedin.com/in/kriti-jangra-286abb2b4/" target="_blank" rel="noreferrer" className="block text-blue-600 dark:text-blue-300 hover:underline">
-                                        Kriti Jangra
-                                    </a>
                                     <a href="https://www.linkedin.com/in/aastha-garg-144101318/" target="_blank" rel="noreferrer" className="block text-blue-600 dark:text-blue-300 hover:underline">
                                         Aastha Garg
                                     </a>
+                                    <a href="https://www.linkedin.com/in/kriti-jangra-286abb2b4/" target="_blank" rel="noreferrer" className="block text-blue-600 dark:text-blue-300 hover:underline">
+                                        Kriti Jangra
+                                    </a>
+
                                 </div>
 
                                 <div>
                                     <p className="font-semibold text-slate-900 dark:text-white">💻 GitHub</p>
-                                    <a href="https://github.com/Kriti978" target="_blank" rel="noreferrer" className="block text-blue-600 dark:text-blue-300 hover:underline">
-                                        @Kriti978
-                                    </a>
                                     <a href="https://github.com/aasthagarg06" target="_blank" rel="noreferrer" className="block text-blue-600 dark:text-blue-300 hover:underline">
                                         @aasthagarg06
                                     </a>
+                                    <a href="https://github.com/Kriti978" target="_blank" rel="noreferrer" className="block text-blue-600 dark:text-blue-300 hover:underline">
+                                        @Kriti978
+                                    </a>
+
                                 </div>
                             </div>
 
