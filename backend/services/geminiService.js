@@ -100,7 +100,7 @@ Return ONLY valid JSON.
     model: process.env.GROQ_MODEL,
 
     temperature: 0.2,
-
+    include_reasoning: false,
     response_format: {
       type: "json_object",
     },

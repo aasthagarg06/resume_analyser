@@ -171,7 +171,7 @@ Return exactly:
     const completion = await groq.chat.completions.create({
 
         model: process.env.GROQ_MODEL,
-
+        include_reasoning: false,
         temperature: 0.15,
 
         response_format: {
